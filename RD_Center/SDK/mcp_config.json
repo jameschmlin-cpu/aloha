@@ -1,0 +1,14 @@
+{
+    "registry": {
+        "sdk_base": "C:\\Genesis\\RD_Center\\SDK"
+    },
+    "settings": {
+        "auto_healing": true,
+        "dfmea_sync": true
+    },
+    "compute_node": {
+        "device": "cuda:0",
+        "gpu_acceleration": true,
+        "fallback_cloud": false
+    }
+}

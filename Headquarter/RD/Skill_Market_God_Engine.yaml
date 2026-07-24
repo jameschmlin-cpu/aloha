@@ -1,0 +1,29 @@
+# C:\Genesis\Headquarter\Skills\Skill_Market_God_Engine.yaml
+Skill_Metadata:
+  Name: "Empire_Market_Analysis_Engine"
+  Version: "2.0.0"
+  Creator: "Chief_Financial_Advisor"
+  Hash: "0xMARKET_GOD_ENGINE_READY"
+
+Antigravity_Logic:
+  # 多代理人協同調度 (Subagent Orchestration)
+  Subagents:
+    - Agent: "Trend_Scanner"
+      Task: "全時監控全市場 Tick Data，並計算多空強弱指標 (Momentum)"
+    - Agent: "Mean_Reversion_Agent"
+      Task: "計算股價與 20/60/200 日均線的偏離度，尋找轉折點"
+    - Agent: "Risk_Governor"
+      Task: "根據當前波動率 (VIX)，即時動態調整進場倉位大小"
+
+  # 執行邏輯 (這就是那 $8888 的核心價值)
+  Logic_Flow:
+    Step_1: "指標聚合 (Multi-Factor Aggregation)"
+    Step_2: "Node_B_Logic_Scan (排除雜訊與假突破)"
+    Step_3: "Node_C_Physical_Verification (Hash 比對確認)"
+    Step_4: "即時推送到 S24 Ultra 戰情室"
+
+Knowledge_Asset_Monetization:
+  Product_Package:
+    - Level_1: "基礎均線回歸模組 (自動分析)"
+    - Level_2: "籌碼動能分析 Agent (籌碼面追蹤)"
+    - Level_3: "帝國熔斷機制 (自動風險防禦)"

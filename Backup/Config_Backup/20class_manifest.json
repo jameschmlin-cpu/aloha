@@ -1,0 +1,9 @@
+{
+    "architecture": "20class_Integrated",
+    "hierarchy": [
+        "20class",
+        "SDK_Logic",
+        "OpenHarness"
+    ],
+    "checksum": "5eb77125414079ccdbcc16124f0d988a4624979bb8447051eb36c6b99834f586"
+}

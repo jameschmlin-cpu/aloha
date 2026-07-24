@@ -1,0 +1,19 @@
+# C:\Genesis\Headquarter\Skills\Skill_Knowledge_Transformation_Engine.yaml
+Skill_Metadata:
+  Name: "Knowledge_to_Asset_Pipeline"
+  Version: "1.0.0"
+  Status: "Active_Learning_Mode"
+  Hash: "0xKNOWLEDGE_PIPELINE_READY"
+
+Transformation_Flow:
+  # 當我們進行金融學習時，系統會自動將過程拆解為以下四種產出
+  Asset_Generation:
+    - Step_1: "Daily_Learnings"   # 將您的觀察轉化為「小白學習心得」
+    - Step_2: "Script_Templates"  # 將 API 對接或回測程式碼轉化為「可複製的積木」
+    - Step_3: "Strategy_Rules"    # 將金融邏輯編譯為「SDK 決策積木」
+    - Step_4: "Product_Packaging" # 將上述素材整合為「基本版/旗艦版」教材
+
+Monetization_Classification:
+  Basic_Tier: "提供基礎概念與操作腳本 (獲客用)"
+  Advanced_Tier: "提供策略回測報告與進階算法 (付費核心)"
+  Flagship_Tier: "提供全自動化部署包與 1-on-1 專業顧問 (高階變現)"

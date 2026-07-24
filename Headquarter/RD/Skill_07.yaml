@@ -1,0 +1,5 @@
+C:\Genesis\.agents\library\
+├── skill_pm_planning.py
+├── skill_code_gen.py
+├── skill_qa_dfmea.py
+└── skill_sales_analysis.py

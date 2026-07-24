@@ -1,0 +1,5 @@
+# AI 工作守則
+參考: [[ARCHITECTURE.md]]
+
+---
+Hash: 4346911306389f9bbdc9e3206ba34c6f9b67dea9a59f01ec51c5038bb80e8806

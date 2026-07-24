@@ -1,0 +1,11 @@
+skill_name: GitHubImporter
+class_name: GitHubImporter
+description: 未提供類別描述。
+methods:
+- name: import_agent
+  description: 未提供方法描述。
+  parameters:
+  - name: agent_name
+    type: Any
+auto_mount: true
+status: READY

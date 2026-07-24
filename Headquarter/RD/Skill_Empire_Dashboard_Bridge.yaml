@@ -1,0 +1,37 @@
+# C:\Genesis\Headquarter\Skills\Skill_Empire_Dashboard_Bridge.yaml
+Skill_Metadata:
+  Name: "Empire_Dashboard_Bridge"
+  Version: "1.0.0"
+  Target_Device: "Samsung_S24_Ultra + PC_Node"
+  Hash: "0xDASHBOARD_VOICE_READY"
+
+Antigravity_Logic:
+  # 模組一：預存指令集 (Preset Logic)
+  Preset_Command_Library:
+    - ID: "P001_DIP_BUY"
+      Condition: "Price <= SMA_200 * 0.95"
+      Action: "Buy_0050_Qty_1000"
+    - ID: "P002_PANIC_SELL"
+      Condition: "System_Manual_Trigger"
+      Action: "Sell_All_Positions"
+
+  # 模組二：觸發器監控 (Active Triggers)
+  Trigger_Engine:
+    Sensor: "Realtime_Tick_Data"
+    Action_Sequence:
+      - Node_A: "Data_Ingest"
+      - Node_B: "Logic_Evaluation"
+      - Node_C: "Physical_Hash_Signature" # 等待語音指令核准
+
+  # 模組三：語音互動鏈 (Voice Interaction)
+  Voice_Command_Integration:
+    Wake_Word: "Genesis"
+    Mapping:
+      "Genesis_Buy": "Execute_Preset_P001"
+      "Genesis_Panic": "Execute_Preset_P002"
+      "Genesis_Status": "Push_Summary_To_Dashboard"
+
+Security_Protocol:
+  # 語音指令不直接下單，必須經由 dashboard 彈窗確認
+  Verification: "UI_Button_Final_Confirmation" 
+  Compliance: "SDK_4_Stages_Validation"

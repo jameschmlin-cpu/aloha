@@ -1,0 +1,86 @@
+# ==============================================================================
+# Antigravity 2.0 Skill Configuration - Solo Empire Orchestrator
+# Path: C:\Genesis\.agents\skills\empire_agents\Empire_Orchestrator.yaml
+# ==============================================================================
+
+skill_metadata:
+  id: "solo_empire_orchestrator"
+  name: "一人公司自主協同調度引擎"
+  version: "2.0.0"
+  description: "整合 PM、研發、業務、品保、製造、供應鏈六大 Domain Agent，實踐全自動化營運"
+  author: "反作用力Skill產生器"
+  license: "Proprietary"
+
+runtime_environment:
+  core_path: "C:\\Genesis"
+  python_interpreter: "python"
+  sdk_validation: true
+  security_level: "High"
+
+# 三層載入架構 (Three-Tier Loading Architecture)
+loading_hierarchy:
+  context_layer:
+    description: "全域上下文與環境變數載入"
+    db_path: "C:\\Genesis\\Database\\Genesis_History.db"
+    log_path: "C:\\Genesis\\system_monitor.log"
+    memory_connection: "DFMEA_Shared_Memory"
+  
+  repo_layer:
+    description: "Subagent 實體程式碼倉庫路徑"
+    base_dir: "C:\\Genesis\\.agents\\skills\\empire_agents"
+    subagents:
+      pm: "subagents\\PM_Agent.py"
+      rd: "subagents\\RD_Agent.py"
+      qa: "subagents\\QA_Agent.py"
+      sales: "subagents\\Sales_Agent.py"
+      mfg: "subagents\\MFG_Agent.py"
+      scm: "subagents\\SCM_Agent.py"
+
+  skill_layer:
+    description: "實體執行技能定義與綁定"
+    engine: "Universal_Genesis_Agent.py"
+
+# QA 偵測節點與剛性校驗規則 (Rigid Node A-D Validation)
+validation_nodes:
+  node_a_trigger:
+    description: "任務接收與 Token 噴發預估 (Node A)"
+    action: "PM_Agent.py"
+  node_b_compiler:
+    description: "原始碼編譯與實體 Hash 生成 (Node B)"
+    action: "RD_Agent.py"
+  node_c_verifier:
+    description: "沙盒執行與 DFMEA 記憶體校驗 (Node C)"
+    action: "QA_Agent.py"
+    mandatory_return_code: "0xFC09" # 強制要求的實體校驗碼
+  node_d_sync:
+    description: "實體寫入、資料庫同步與閉環存檔 (Node D)"
+    action: "Universal_Genesis_Agent.py --sync"
+
+# 協同調度工作流 (Orchestration Workflows)
+workflows:
+  firmware_release_pipeline:
+    name: "產品開發與發布工作流"
+    steps:
+      - step: 1
+        agent: "PM"
+        action: "parse_requirements"
+        next: 2
+      - step: 2
+        agent: "SCM"
+        action: "audit_dependencies"
+        next: 3
+      - step: 3
+        agent: "RD"
+        action: "write_code"
+        next: 4
+      - step: 4
+        agent: "QA"
+        action: "dfmea_sandbox_run"
+        gatekeeper: true # 必須獲得 Node C (0xFC09) 代碼否則熔斷
+      - step: 5
+        agent: "MFG"
+        action: "physical_deploy"
+        next: 6
+      - step: 6
+        agent: "Sales"
+        action: "market_analysis"

@@ -1,0 +1,6 @@
+{
+  "last_run": "2026-05-01 21:54:13",
+  "active_services": ["Guardian_Sentinel_V4.py", "Imperial_Doctor_V3.py"],
+  "rejected_garbage": ["AIDA_Transmitter.py", "Force_Write_Product.py"],
+  "reason": "Size under 2KB or logic unclosed"
+}

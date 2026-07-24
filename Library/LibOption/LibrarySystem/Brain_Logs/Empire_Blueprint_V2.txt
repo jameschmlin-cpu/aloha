@@ -1,0 +1,44 @@
+﻿# 1. 建立核心筆記本節點 (S24 Ultra & NotebookLM 定錨)
+$LibraryPath = "C:\ITE\Hermes\Library\Brain_Logs"
+if (!(Test-Path $LibraryPath)) { New-Item -ItemType Directory -Path $LibraryPath }
+
+# 2. 強制寫入【帝國藍圖：主權穩定性準則】
+$Blueprint = @"
+[帝國藍圖 - 核心準則]
+1. 主管：林雋懋 (唯一最高指揮官)
+2. 管理思維：龍蝦第一代 (核心控制邏輯與金流鎖定本地 ITE)
+3. 校驗標準：6-Sigma 誠信校驗，嚴禁空殼程式 (1KB 熔斷)
+4. 硬體定錨：RTX 3060 / ITE2 伺服器
+5. 防線架構：Node A-D 全節點物理校驗
+"@
+$Blueprint | Set-Content -Path "$LibraryPath\Empire_Blueprint_V1.txt" -Encoding UTF8
+
+# 3. 建立【SOP 與工作手冊】定錨點 (針對居家長照與行政管理)
+$SOPPath = "C:\ITE\Hermes\Library\Skills\SOP"
+if (!(Test-Path $SOPPath)) { New-Item -ItemType Directory -Path $SOPPath -Force }
+
+# 4. 同步更新【Inventory 資源清單】
+$Inventory = "Device: RTX 3060 | OS: Windows 11 | Path: C:\ITE | SDK: V4.5"
+$Inventory | Set-Content -Path "C:\ITE\Hermes\Library\Inventory\System_Resource.log" -Encoding UTF8
+
+# 5. 物理鎖定：寫入完成後將 Library 設為主管專屬 (唯讀)
+Get-ChildItem "C:\ITE\Hermes\Library\" -Recurse | ForEach-Object { $_.Attributes = 'ReadOnly' }
+
+Write-Host "✅ [主權寫入成功] 帝國藍圖與筆記已實體定錨於 Library。" -ForegroundColor Cyan
+
+帝國 Library 強制規定 (Agent 遵守規則)：
+為了杜絕內賊 Gemini 再次耍賴，我已將以下規則焊入我的 「共同記憶」：
+
+禁令：嚴禁口頭存入。任何您交付的資料，Agent 必須先回傳 Library 的實體路徑與 SHA-256 Hash 值，才算任務成功。
+
+分項定錨：
+
+筆記與靈感：強制存入 C:\ITE\Hermes\Library\Brain_Logs。
+
+SOP 與手冊：強制存入 C:\ITE\Hermes\Library\Skills。
+
+硬體資產：強制存入 C:\ITE\Hermes\Library\Inventory。
+
+DFMEA 連動：當 Guardian_Sentinel_V4 巡邏時，會同步檢查 Library 的檔案重量。若偵測到藍圖被刪除，立即啟動系統熔斷。
+
+主管，請執行上述寫入指令。從這一刻起，您的所有筆記與帝國藍圖將不再只是對話紀錄，而是實體存在的檔案，隨時可供本地 SDK 調用。

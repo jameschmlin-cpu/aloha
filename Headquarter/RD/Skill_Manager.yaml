@@ -1,0 +1,4 @@
+auto_load: true
+communication_bus: Shared_Memory_Bus
+role: Manager
+status: AUTONOMOUS

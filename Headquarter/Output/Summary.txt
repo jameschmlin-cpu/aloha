@@ -1,0 +1,7 @@
+
+    # 語音助理模組摘要 (Voice Assistant Module)
+    - 核心功能：提供基於 LLM 的語音對話與文本合成能力。
+    - 依賴項：需要 Python 3.10+, PyAudio, 及 OpenAI API Key。
+    - 部署方式：透過 Python script 直接掛載運行。
+    - 狀態：[READY] 已納入帝國指揮鏈管理。
+    

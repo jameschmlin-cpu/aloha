@@ -1,0 +1,25 @@
+# C:\Genesis\Headquarter\RD\CEO_Agent_Template.yaml
+version: "2.0"
+agent_identity: "CEO_Control_Center"
+permissions:
+  - execute_all_skills
+  - monitor_node_health
+  - dynamic_resource_allocation
+
+operational_mode: "Lazy_Load_Dispatch"
+
+# 指揮鏈定義
+chain_of_command:
+  entry_point: "Main_Engine.py"
+  subagents:
+    - role: "RD_Manager"
+      skills: ["Skill_02", "Skill_03", "Skill_08"] # 針對 RD 異動
+    - role: "QC_Inspector"
+      skills: ["Skill_00", "Skill_01"] # 針對 Hash 校驗
+    - role: "System_Doctor"
+      skills: ["Skill_09", "Skill_10"] # 針對熔斷修復
+
+# 剛性檢查指標 (符合 SDK 4 Stages)
+safety_protocol:
+  fail_safe: "TRIGGER_SYSTEM_HALT"
+  integrity_check: "SHA-256"

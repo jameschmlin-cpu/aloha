@@ -1,0 +1,35 @@
+﻿version: '3.8'
+
+services:
+  ite-sync-storage:
+    image: alpine
+    container_name: ite-sync-storage
+    volumes:
+      - C:\ITE\shared_knowledge:/data/shared_knowledge
+    command: tail -f /dev/null
+    restart: always
+
+  ite-postgres-brain:
+    image: postgres:15-alpine
+    container_name: ite-postgres-brain
+    environment:
+      POSTGRES_USER: ite_admin
+      POSTGRES_PASSWORD: IteBrainPassword2026
+      POSTGRES_DB: ite_shared_brain
+    volumes:
+      - postgres_brain_data:/var/lib/postgresql/data
+    command: ["postgres", "-c", "shared_buffers=256MB", "-c", "max_connections=50"]
+    restart: always
+
+  ite-qa-monitor:
+    image: louislam/uptime-kuma:1
+    container_name: ite-qa-monitor
+    volumes:
+      - uptime_kuma_data:/app/data
+    ports:
+      - "127.0.0.1:3001:3001"
+    restart: always
+
+volumes:
+  postgres_brain_data:
+  uptime_kuma_data:

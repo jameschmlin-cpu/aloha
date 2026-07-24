@@ -1,0 +1,5 @@
+# 變更紀錄
+參考: [[ARCHITECTURE.md]]
+
+---
+Hash: b098f298c54be247bd8425751f509280464f90699bce7247438e1ebeac485811

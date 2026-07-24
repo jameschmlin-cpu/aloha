@@ -1,0 +1,12 @@
+# Genesis_Headquarter_Bus.yaml
+System_Status: "ACTIVE"[cite: 1]
+Rules_Version: "1.0"[cite: 1]
+
+Resource_Policy:
+  Base_Allocation_Per_Node: 0.15[cite: 1]
+  Dynamic_Pool_Max: 0.50[cite: 1]
+  System_Reserve_Hard_Lock: 0.05[cite: 1]
+
+Communication:
+  Mandatory_Bridge_Relay: true[cite: 1]
+  Hash_Validation: required[cite: 1]

@@ -1,0 +1,34 @@
+skill_name: UniversalGenesisAgent
+class_name: UniversalGenesisAgent
+description: 未提供類別描述。
+methods:
+- name: calculate_file_hash
+  description: 實體 Hash 校驗，確保檔案寫入完整且未被篡改
+  parameters:
+  - name: file_path
+    type: Any
+- name: skill_diagnostic
+  description: '[PM Agent] 需求分析與工作拆解 (Node A)'
+  parameters: []
+- name: skill_compiler
+  description: '[RD Agent] 程式撰寫與系統編譯 (Node B)'
+  parameters: []
+- name: skill_tester_kanban
+  description: '[QA Agent] 看板模式品質校驗 - 失敗退回重試，不直接熔斷'
+  parameters:
+  - name: task_id
+    type: Any
+- name: skill_security
+  description: '[SCM Agent] 供應鏈管理與權限安全稽核'
+  parameters: []
+- name: skill_sync
+  description: '[MFG_Agent] 自動化部署、製造與資料庫同步 (Node D)'
+  parameters: []
+- name: skill_analyst
+  description: '[Sales Agent] 市場與數據成效分析'
+  parameters: []
+- name: run_all
+  description: 企業看板工作流模式啟動 (非同步/輪詢模擬)
+  parameters: []
+auto_mount: true
+status: READY

@@ -1,0 +1,10 @@
+Skill_Metadata:
+  Name: "Solo_Decision_Bridge"
+  Version: "1.0.0"
+  Status: "Ready_For_Deployment"
+  Hash: "0xGEN1_GEN4_BRIDGE_88D4"
+
+Execution_Context:
+  Source: "Gen1_Input"
+  Target: "Gen4_Decision_Node"
+  Safety: "DFMEA_Level_1"

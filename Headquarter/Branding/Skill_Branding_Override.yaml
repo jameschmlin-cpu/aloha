@@ -1,0 +1,20 @@
+# C:\Genesis\Headquarter\Branding\Skill_Branding_Override.yaml
+Skill_Metadata:
+  Name: "Branding_Override_Engine"
+  Version: "1.0.0"
+  Status: "Branding_Locked"
+  Hash: "0xBRAND_OVERRIDE_READY"
+
+Branding_Logic:
+  Detection_Phase:
+    Action: "Read_Hardware_UID" # 讀取硬體 ID
+    Identity: "Native_Genesis_Identity" # 忽略製造商名稱，一律標記為 Genesis
+  
+  Visual_Override:
+    Display_Name: "Genesis_Secure_Link"
+    Icon_Path: "C:\Genesis\Assets\Logo_Icon.ico"
+    Splash_Screen: "C:\Genesis\Assets\Startup_Animation.mp4" # 啟動時顯示您的公司 Logo
+
+  Security_State:
+    Policy: "No_ThirdParty_Branding"
+    Action: "Hide_Manufacturer_Software" # 隱藏所有硬體商預載之管理程式

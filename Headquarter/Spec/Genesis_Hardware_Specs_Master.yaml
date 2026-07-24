@@ -1,0 +1,19 @@
+# C:\Genesis\Headquarter\Specs\Genesis_Hardware_Specs_Master.yaml
+Skill_Metadata:
+  Name: "Hardware_System_Standardization"
+  Version: "1.0.0"
+  Status: "Research_Phase"
+  Hash: "0xHARDWARE_MASTER_READY"
+
+Hardware_Strategy:
+  Primary_Device: "Professional_Dongle" # 加密鎖
+  Key_Features:
+    - "晶片級加密記憶體 (Secure_Memory)"
+    - "唯一硬體 UID (Hardware_Fingerprint)"
+    - "物理防寫/實體開關 (Write_Protect_Switch - 用於Gen4/5)"
+    - "標準 USB/Type-C 介面 (通用性)"
+
+Development_Priority_List:
+  - Priority_1: "握手協議 (Handshake Protocol)" # 必須解決加密鎖與原生 SDK 的底層通訊
+  - Priority_2: "斷開鎖定邏輯 (Dead_Code_Shutdown)" # 拔鎖後功能即刻失效的硬實作
+  - Priority_3: "雲端 Signal 授權通道" # 與加密鎖 UID 綁定的唯一 Signal 激活流程

@@ -1,0 +1,2 @@
+Content: CORE_STRUCT_AGENT_6
+Hash: d35b59be3489eccb63ece5f7b5c02027f97ee38971c1a2ce3e989aa1c5f3ee4a

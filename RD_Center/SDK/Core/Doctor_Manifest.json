@@ -1,0 +1,11 @@
+{
+  "system_map": {
+    "C:\\ITE\\SDK\\Base\\connectivity_base.py": {"allowed_actions": ["read", "socket"]},
+    "C:\\ITE\\Genesis_Core\\Memory_Interface.py": {"allowed_actions": ["read", "write_db"]},
+    "C:\\ITE\\Genesis_Core\\Guardian_Bot.py": {"allowed_actions": ["quarantine", "kill"]}
+  },
+  "recovery_config": {
+    "snapshot_root": "D:\\SystemBackUp\\ITE_Mirror_Golden",
+    "restore_method": "ROBOCOPY_MIRROR"
+  }
+}

@@ -1,0 +1,1104 @@
+/* styles.css */
+:root {
+    --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #f6f0dd 100%);
+    --panel-bg: rgba(255, 255, 255, 0.82);
+    --border-color: rgba(230, 180, 0, 0.28);
+    --primary-color: #ffb300;
+    --primary-hover: #e5a100;
+    --primary-glow: rgba(255, 179, 0, 0.25);
+    --accent-color: #2c2c2c;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --tg-header-bg: #4a76a8; /* Classic Telegram blue */
+    --tg-sent-bg: #fff5cc; /* Soft yellow for sent message bubbles */
+    --tg-received-bg: #f1f2f5;
+    --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--bg-gradient);
+    font-family: var(--font-family);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styling */
+.app-header {
+    background: var(--panel-bg);
+    border-bottom: 2px solid var(--border-color);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(230, 180, 0, 0.08);
+    z-index: 10;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pulse-glow {
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--primary-color);
+    animation: pulse 1.8s infinite alternate;
+}
+
+.header-logo h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
+.system-summary {
+    display: flex;
+    gap: 15px;
+}
+
+.summary-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.summary-card .label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.summary-card .value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.summary-card.text-accent .value {
+    color: #2e7d32;
+}
+
+/* Main Dashboard layout */
+.dashboard-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr 340px;
+    overflow: hidden;
+}
+
+/* Left Sidebar tree views */
+.sidebar-panel {
+    background: var(--panel-bg);
+    border-right: 2px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.sidebar-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.sidebar-section-header h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+.btn-add-device {
+    background: var(--primary-color);
+    color: #1a1a1a;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: 0 2px 6px var(--primary-glow);
+}
+
+.btn-add-device:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 10px 0;
+}
+
+/* Tree Nodes styling */
+.tree-node {
+    margin-left: 12px;
+}
+
+.tree-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    user-select: none;
+}
+
+.tree-item:hover {
+    background: rgba(255, 179, 0, 0.12);
+    color: #b37d00;
+}
+
+.tree-item.folder-node::before {
+    content: "▶";
+    font-size: 9px;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.tree-item.folder-node.expanded::before {
+    transform: rotate(90deg);
+}
+
+.tree-children {
+    display: none;
+    border-left: 1px dashed var(--border-color);
+    margin-left: 16px;
+}
+
+.tree-children.active {
+    display: block;
+}
+
+.device-metric {
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 3px 0 3px 26px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.device-metric .val {
+    font-weight: 600;
+    color: #b37d00;
+}
+
+/* Center Section: Projection screen */
+.projection-screen {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.02);
+}
+
+.screen-tabs {
+    background: #fdfdfd;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    padding: 0 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 15px 25px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: border-bottom-color 0.2s, color 0.2s;
+}
+
+.tab-btn:hover {
+    color: var(--accent-color);
+}
+
+.tab-btn.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+.screen-body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.tab-content {
+    display: none;
+    height: 100%;
+    overflow: auto;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Code projector display */
+.projector-header {
+    background: #fcfcfc;
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    word-break: break-all;
+}
+
+.code-view {
+    flex: 1;
+    background: #fafafa;
+    padding: 20px;
+    overflow: auto;
+    font-family: var(--font-code);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.code-view code {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* DFMEA Table layout */
+.table-container {
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 13px;
+}
+
+th {
+    background: #faf5e6;
+    color: var(--accent-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+tr:hover {
+    background: #fdfaf2;
+}
+
+.severity-high {
+    color: #c62828;
+    font-weight: 700;
+    background: rgba(198, 40, 40, 0.05);
+    text-align: center;
+    border-radius: 4px;
+}
+
+.severity-medium {
+    color: #ef6c00;
+    font-weight: 700;
+    background: rgba(239, 108, 0, 0.05);
+    text-align: center;
+    border-radius: 4px;
+}
+
+/* Console logs screen */
+.console-box {
+    flex: 1;
+    background: #1e1e1e;
+    color: #f1f1f1;
+    font-family: var(--font-code);
+    font-size: 12px;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.log-line {
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+.log-line.info {
+    color: #8ab4f8;
+}
+
+.log-line.success {
+    color: #81c784;
+}
+
+.log-line.error {
+    color: #e57373;
+}
+
+/* Right Panel: Telegram client widget */
+.telegram-panel {
+    background: var(--panel-bg);
+    border-left: 2px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.telegram-header {
+    background: var(--tg-header-bg);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tg-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.tg-status-info h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tg-status-info .tg-status-online {
+    font-size: 11px;
+    opacity: 0.85;
+}
+
+.telegram-messages {
+    flex: 1;
+    background: #eaeef2;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message-bubble {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.message-bubble p {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.message-bubble.received {
+    align-self: flex-start;
+    background: var(--tg-received-bg);
+    color: var(--text-main);
+    border-bottom-left-radius: 3px;
+}
+
+.message-bubble.sent {
+    align-self: flex-end;
+    background: var(--tg-sent-bg);
+    color: var(--text-main);
+    border-bottom-right-radius: 3px;
+}
+
+.message-bubble .time {
+    display: block;
+    text-align: right;
+    font-size: 9px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.telegram-input-bar {
+    background: white;
+    border-top: 1px solid var(--border-color);
+    padding: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.telegram-input-bar input {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.telegram-input-bar input:focus {
+    border-color: var(--primary-color);
+}
+
+.telegram-input-bar button {
+    background: var(--tg-header-bg);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.telegram-input-bar button:hover {
+    opacity: 0.9;
+}
+
+/* Modal overlays */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 10px 30px rgba(230, 180, 0, 0.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: #faf5e6;
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.form-group input, .form-group select {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: var(--primary-color);
+}
+
+.btn-submit {
+    width: 100%;
+    background: var(--primary-color);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 3px 8px var(--primary-glow);
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background: var(--primary-hover);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 4px var(--primary-color); }
+    100% { transform: scale(1.05); box-shadow: 0 0 16px var(--primary-color); }
+}
+
+/* CRUD Action Buttons */
+.btn-action {
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: opacity 0.2s;
+}
+
+.btn-edit {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.btn-delete {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.btn-action:hover {
+    opacity: 0.8;
+}
+
+/* Offline Indicator styles */
+.tg-status-offline {
+    font-size: 11px;
+    color: #ffe8a3;
+    font-weight: 600;
+}
+
+.tg-status-info.offline h3 {
+    color: #ffe8a3;
+}
+
+/* Task Flow Visualizer Styles */
+.task-flow-visualization {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.flow-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+    flex: 1;
+    position: relative;
+}
+
+.step-node {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #1e1e1e;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #888;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.step-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 100px;
+    transition: color 0.3s;
+}
+
+/* Step Node States */
+.step-node.state-success {
+    border-color: #10b981;
+    color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    background: rgba(16, 185, 129, 0.1);
+}
+.flow-step.state-success .step-label {
+    color: #10b981;
+}
+
+.step-node.state-error {
+    border-color: #ef4444;
+    color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+    background: rgba(239, 68, 68, 0.1);
+}
+.flow-step.state-error .step-label {
+    color: #ef4444;
+}
+
+.step-node.state-active-yellow {
+    border-color: #f59e0b;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+    animation: flowPulseYellow 1.5s infinite alternate;
+}
+.flow-step.state-active-yellow .step-label {
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+.step-node.state-active-blue {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.15);
+    animation: flowPulseBlue 1.5s infinite alternate;
+}
+.flow-step.state-active-blue .step-label {
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+.step-node.state-pending {
+    border-color: #4b5563;
+    color: #4b5563;
+    background: #111827;
+}
+
+/* Connectors */
+.step-connector {
+    position: absolute;
+    height: 3px;
+    background: #374151;
+    z-index: 1;
+    top: 28px;
+    transition: all 0.3s ease;
+}
+
+.step-connector.state-success {
+    background: #10b981;
+    box-shadow: 0 0 6px rgba(16, 185, 129, 0.3);
+}
+
+.step-connector.state-active {
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    background-size: 200% 200%;
+    animation: gradientShift 2s infinite linear;
+}
+
+@keyframes flowPulseYellow {
+    0% { box-shadow: 0 0 4px rgba(245, 158, 11, 0.3); transform: scale(0.98); }
+    100% { box-shadow: 0 0 14px rgba(245, 158, 11, 0.8); transform: scale(1.05); }
+}
+
+@keyframes flowPulseBlue {
+    0% { box-shadow: 0 0 4px rgba(59, 130, 246, 0.3); transform: scale(0.98); }
+    100% { box-shadow: 0 0 14px rgba(59, 130, 246, 0.8); transform: scale(1.05); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Home Page Status Grid Styles */
+.status-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.status-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.status-card .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+.status-card .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-card .status-indicator.online {
+    background: #10b981;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.status-card .status-indicator.offline {
+    background: #ef4444;
+    box-shadow: 0 0 8px #ef4444;
+}
+
+.status-card .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+}
+
+.status-card .detail-label {
+    color: var(--text-dim);
+}
+
+.status-card .detail-val {
+    float: right;
+    font-weight: 600;
+    color: #f3f4f6;
+    font-family: var(--font-code);
+}
+
+.status-card .detail-val.status-ok {
+    color: #10b981;
+}
+
+/* Animations */
+@keyframes bellRing {
+    0% { transform: rotate(0); }
+    15% { transform: rotate(15deg); }
+    30% { transform: rotate(-15deg); }
+    45% { transform: rotate(10deg); }
+    60% { transform: rotate(-10deg); }
+    75% { transform: rotate(4deg); }
+    85% { transform: rotate(-4deg); }
+    100% { transform: rotate(0); }
+}
+
+@keyframes bannerPulse {
+    0% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.3); }
+    100% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.7); }
+}
+
+/* Telemetry Projector Styles */
+.telemetry-projector {
+    background: rgba(16, 24, 48, 0.15);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-proj {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    color: var(--text-dim);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-proj:hover {
+    background: rgba(99, 102, 241, 0.1);
+    color: #a5b4fc;
+    border-color: #6366f1;
+}
+
+.btn-proj.active {
+    background: rgba(99, 102, 241, 0.25) !important;
+    border-color: #6366f1 !important;
+    color: #a5b4fc !important;
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    100% { transform: scale(1.05); opacity: 1; text-shadow: 0 0 10px rgba(96, 165, 250, 0.8); }
+}
+
+/* --- Premium Monitor Carousel Styling --- */
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: #6366f1;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.4);
+}
+
+.carousel-card {
+    background: linear-gradient(135deg, #ffffff 0%, #faf8f0 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    min-height: 180px;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.carousel-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.carousel-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.carousel-status-badge {
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.carousel-status-badge.online {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.carousel-status-badge.offline {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    animation: textFlash 1s infinite alternate;
+}
+
+.carousel-status-badge.repairing {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+@keyframes textFlash {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Projects and Operations lists */
+.carousel-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.carousel-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 4px 0;
+}
+
+.carousel-list-item .item-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.carousel-list-item .item-progress-wrapper {
+    width: 150px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.carousel-list-item .item-progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.carousel-list-item .item-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #3b82f6);
+    border-radius: 3px;
+}
+
+.carousel-list-item .item-eta {
+    font-size: 11px;
+    color: var(--text-muted);
+    width: 100px;
+    text-align: right;
+    font-family: var(--font-code);
+}
+
+/* Device metrics layout inside carousel */
+.carousel-grid-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.carousel-metric-card {
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.carousel-metric-card .label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.carousel-metric-card .value {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Beep Alert pulse animation */
+.heartbeat-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+    display: inline-block;
+    box-shadow: 0 0 8px #10b981;
+    transition: all 0.3s;
+}
+
+.heartbeat-dot.offline {
+    background: #ef4444;
+    box-shadow: 0 0 10px #ef4444;
+    animation: alertPulse 0.8s infinite alternate;
+}
+
+@keyframes alertPulse {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    100% { transform: scale(1.3); opacity: 1; }
+}
+
+@keyframes bannerPulse {
+    0% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
+    100% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.9); }
+}
+
+

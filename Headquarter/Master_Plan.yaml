@@ -1,0 +1,27 @@
+# C:\Genesis\Headquarter\Master_Plan.yaml
+Skill_Metadata:
+  Name: "Genesis_Empire_Core"
+  Version: "1.0.0"
+  Strategy: "Solo-preneur_Empire_Scale"
+  Hash: "0xGENESIS_EMPIRE_MASTER_READY"
+
+Architecture_Blueprints:
+  # 繼承鏈定義
+  Inheritance_Chain:
+    - Generation_1: "Life_Butler (生活總管)"
+    - Generation_2: "IT_Maintenance (IT工程師 - 繼承Gen1)"
+    - Generation_3: "Financial_Expert (金融理財 - 繼承Gen1,2)"
+    - Generation_4: "Solo_Expert (一人專家變現 - 繼承Gen1,2,3)"
+    - Generation_5: "Total_Life_Care (全能長照 - 繼承Gen1,2,3,4)"
+
+  # 物理與軟體防禦規則
+  Defense_Protocol:
+    - Hardware_Lock: "Physical_Dongle_Handshake"
+    - Execution_Mode: "Native_Local_Run (No_Cloud_Dependence_After_Init)"
+    - Security_Feature: "Dead_Code_Technology (未認證即死碼)"
+
+  # 商業營運邏輯
+  Operating_Principles:
+    - Drop_Shipping: "零庫存經銷"
+    - Outsourcing: "例外事件委外契約"
+    - Revenue: "階梯式年金 + 授權權利金"

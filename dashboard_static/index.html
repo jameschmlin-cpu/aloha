@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Control Center</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-logo">
+            <span class="pulse-glow"></span>
+            <h1 data-i18n="header-title">GENESIS CONTROL STATION</h1>
+        </div>
+        <div class="system-summary">
+            <div class="summary-card">
+                <span class="label" data-i18n="label-cpu">CPU LOAD</span>
+                <span class="value" id="header-cpu">--%</span>
+            </div>
+            <div class="summary-card">
+                <span class="label" data-i18n="label-ram">RAM LOAD</span>
+                <span class="value" id="header-ram">--%</span>
+            </div>
+            <div class="summary-card">
+                <span class="label" data-i18n="label-gpu">GPU TEMP</span>
+                <span class="value" id="header-gpu-temp">--°C</span>
+            </div>
+            <div class="summary-card text-accent">
+                <span class="label" data-i18n="label-sync">CLOUD SYNC</span>
+                <span class="value" id="header-cloud-sync" style="color: #10b981;" data-i18n="status-connected">CONNECTED</span>
+            </div>
+            <div class="summary-card text-accent">
+                <span class="label" data-i18n="label-status">SYSTEM STATUS</span>
+                <span class="value status-ok" data-i18n="status-healthy">HEALTHY</span>
+            </div>
+            <div class="summary-card" style="cursor: pointer; justify-content: center; align-items: center; background: linear-gradient(135deg, #2c2c2c, #1a1a1a); border-color: #ffb300;" id="btn-lang-toggle">
+                <span class="value" style="color: #ffb300; font-size: 13px;" data-i18n="lang-toggle">🌐 繁中 / EN</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar: Left tree views -->
+        <aside class="sidebar-panel">
+            <div class="sidebar-section-header">
+                <h2 data-i18n="title-devices">🖥️ DEVICES & SENSORS</h2>
+                <button class="btn-add-device" id="btn-open-modal" data-i18n="btn-add-device">＋ Add Device</button>
+            </div>
+            <div class="device-tree" id="device-tree-root">
+                <!-- Device tree dynamically populated -->
+            </div>
+
+            <hr class="divider">
+
+            <div class="sidebar-section-header">
+                <h2 data-i18n="title-procedures">⚡ STORED PROCEDURES</h2>
+            </div>
+            <div class="stored-procedures-panel" style="padding: 10px; display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-submit" id="btn-proc-doctor" style="background: linear-gradient(135deg, #10b981, #059669); margin: 0; font-size: 13px; font-weight: bold; justify-content: center; height: 36px; display: flex; align-items: center;" data-i18n="btn-proc-doctor">🩺 系統一鍵健檢 (Doctor)</button>
+                <button class="btn-submit" id="btn-proc-robot" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); margin: 0; font-size: 13px; font-weight: bold; justify-content: center; height: 36px; display: flex; align-items: center;" data-i18n="btn-proc-robot">🦀 機械手臂軌跡 (Robot)</button>
+                <button class="btn-submit" id="btn-proc-sensor" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); margin: 0; font-size: 13px; font-weight: bold; justify-content: center; height: 36px; display: flex; align-items: center;" data-i18n="btn-proc-sensor">🌡️ 數據採樣監控 (Sensor)</button>
+                <button class="btn-submit" id="btn-proc-sync" style="background: linear-gradient(135deg, #f59e0b, #d97706); margin: 0; font-size: 13px; font-weight: bold; justify-content: center; height: 36px; display: flex; align-items: center;" data-i18n="btn-proc-sync">☁️ 雲地心跳對齊 (Sync)</button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="sidebar-section-header">
+                <h2 data-i18n="title-workspace">📁 WORKSPACE FILES</h2>
+            </div>
+            <div class="file-tree" id="file-tree-root">
+                <!-- File tree dynamically populated -->
+            </div>
+        </aside>
+
+        <!-- Main View: Right projection screen -->
+        <main class="projection-screen">
+            <div class="screen-tabs">
+                <button class="tab-btn active" data-tab="home" data-i18n="tab-home">🏠 綜合指揮中心 (Home)</button>
+                <button class="tab-btn" data-tab="projector" data-i18n="tab-projector">🎬 Code Projector</button>
+                <button class="tab-btn" data-tab="dfmea" data-i18n="tab-dfmea">📋 DFMEA Matrix</button>
+                <button class="tab-btn" data-tab="console" data-i18n="tab-console">📟 Console Logs</button>
+                <button class="tab-btn" data-tab="cloud-hq" data-i18n="tab-cloud">☁️ Cloud Command</button>
+                <button class="tab-btn" data-tab="clawlibrary" data-i18n="tab-clawlibrary">🏢 2D 虛擬辦公室</button>
+                <button class="tab-btn" data-tab="nodered" data-i18n="tab-nodered">🔴 Node-RED 儀表板</button>
+                <button class="tab-btn" data-tab="skills-generator" data-i18n="tab-skills-generator">💡 萬用技能產生器</button>
+            </div>
+            <div class="screen-body">
+                <!-- Tab: Home -->
+                <div class="tab-content active" id="tab-home">
+                    <!-- Alarm Banner -->
+                    <div id="home-alarm-banner" class="home-alert-banner" style="display: none; background: linear-gradient(90deg, #ef4444, #991b1b); padding: 15px; border-radius: 8px; margin-bottom: 20px; align-items: center; justify-content: space-between; border: 1px solid #fca5a5; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 22px; animation: bellRing 1s infinite;">🚨</span>
+                            <div>
+                                <strong style="color: white; font-size: 14px;" data-i18n="alarm-title">系統異常告警：主動派遣 Doctor 自癒修復中...</strong>
+                                <p id="alarm-desc" style="color: #ffe4e6; font-size: 11px; margin: 3px 0 0 0; font-family: var(--font-code);">[Exception] Waiting for analysis...</p>
+                            </div>
+                        </div>
+                        <span class="badge" style="background: rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; text-transform: uppercase;" data-i18n="badge-repair">REPAIR ACTIVE</span>
+                    </div>
+
+                    <h3 style="color: #6366f1; margin-bottom: 15px; font-weight: 600; font-size: 1.1rem; letter-spacing: 0.5px;" data-i18n="home-sec-status">🖥️ 系統軟硬體監控與專案看板 (System Monitor Board)</h3>
+                    
+                    <!-- Carousel Navigation and Timer Progress Bar -->
+                    <div class="carousel-nav-header" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; padding: 0 5px;">
+                        <div class="carousel-indicators" id="carousel-dots-container" style="display: flex; gap: 8px;">
+                            <!-- Dots rendered by JS -->
+                        </div>
+                        <div class="carousel-timer-bar-container" style="flex: 1; height: 4px; background: rgba(0,0,0,0.15); margin: 0 20px; border-radius: 2px; overflow: hidden; position: relative;">
+                            <div class="carousel-timer-bar-fill" id="carousel-timer-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ffb300, #ff8000); transition: width 0.1s linear;"></div>
+                        </div>
+                        <div class="carousel-buttons" style="display: flex; gap: 10px;">
+                            <button id="btn-carousel-prev" class="btn-carousel-ctrl" style="background: none; border: 1px solid var(--border-color); color: var(--text-main); font-size: 11px; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-weight: 700; transition: all 0.2s;">◀</button>
+                            <button id="btn-carousel-next" class="btn-carousel-ctrl" style="background: none; border: 1px solid var(--border-color); color: var(--text-main); font-size: 11px; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-weight: 700; transition: all 0.2s;">▶</button>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Active Slide Container -->
+                    <div id="carousel-board-wrapper" style="margin-bottom: 25px; min-height: 180px; position: relative; transition: all 0.3s ease;">
+                        <!-- Content dynamically rendered by JS -->
+                    </div>
+
+                    <!-- Central Telemetry Projector -->
+                    <!-- Central Telemetry Projector -->
+                    <div class="telemetry-projector" id="central-telemetry-projector" style="background: rgba(16, 24, 48, 0.2); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; margin: 0 auto 25px auto; max-width: 1000px; width: 100%; box-shadow: 0 0 25px rgba(99, 102, 241, 0.08); position: relative; overflow: hidden; text-align: center;">
+                        <!-- Holographic Scanline Overlay -->
+                        <div class="projector-scanlines" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 6px 100%; z-index: 3; opacity: 0.4;"></div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 12px; margin-bottom: 20px; position: relative; z-index: 4;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 20px; animation: pulseGlow 1.5s infinite alternate;">🛸</span>
+                                <h3 style="color: #60a5fa; margin: 0; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;" data-i18n="proj-title">遙測智能投射幕 (Holographic Telemetry Projector)</h3>
+                            </div>
+                            <!-- Navigation tabs -->
+                            <div class="projector-nav" style="display: flex; gap: 8px;">
+                                <button class="btn-proj active" id="btn-chart-alloc" data-mode="allocation" style="background: rgba(99,102,241,0.15); border: 1px solid #6366f1; color: #a5b4fc; padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; transition: all 0.3s;" data-i18n="proj-tab-alloc">📊 資源佔用圓餅圖</button>
+                                <button class="btn-proj" id="btn-chart-trends" data-mode="trends" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; transition: all 0.3s;" data-i18n="proj-tab-trends">📈 負載歷史推移圖</button>
+                                <button class="btn-proj" id="btn-chart-compare" data-mode="compare" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; transition: all 0.3s;" data-i18n="proj-tab-compare">⚖️ 過去數據對比</button>
+                                <button class="btn-proj" id="btn-proj-media" data-mode="media" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; transition: all 0.3s;">🎬 投影媒介/歷史</button>
+                                <button class="btn-proj" id="btn-proj-ai" data-mode="ai-intelligence" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); color: var(--text-dim); padding: 6px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; cursor: pointer; transition: all 0.3s;">🧬 AI 編排與依賴圖譜</button>
+                            </div>
+                        </div>
+
+                        <!-- Chart Canvas area -->
+                        <div style="position: relative; height: 260px; display: flex; align-items: center; justify-content: center; z-index: 4; width: 100%;">
+                            <canvas id="telemetry-chart-canvas" width="900" height="260" style="max-width: 100%; max-height: 100%; transition: all 0.3s;"></canvas>
+                            <div id="projector-overlay-content" style="display: none; width: 100%; height: 100%; overflow-y: auto; color: #fff; text-align: left; padding: 10px; font-family: var(--font-code); background: rgba(10, 15, 30, 0.6); border-radius: 8px;"></div>
+                        </div>
+                        
+                        <!-- AI Insights footer -->
+                        <div style="margin-top: 15px; font-size: 14px; color: #e5e7eb; font-weight: 600; text-align: center; font-family: var(--font-code); display: flex; justify-content: center; align-items: center; gap: 8px; position: relative; z-index: 4;">
+                            <span style="color: #60a5fa;">💡 AI Insight:</span>
+                            <span id="proj-insight" style="color: #60a5fa; text-shadow: 0 0 5px rgba(96, 165, 250, 0.3);">正在加載遙測分析與比較數據...</span>
+                        </div>
+                    </div>
+
+                    <!-- Row 1: R&D Progress (Full Width) -->
+                    <div class="card" style="padding: 25px; margin-bottom: 25px; border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                        <h3 style="color: #6366f1; margin-top: 0; margin-bottom: 18px; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;" data-i18n="home-sec-dev">🚀 今日研發進度與完成項目 (R&D Progress)</h3>
+                        
+                        <div style="margin-bottom: 22px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; color: var(--text-muted); margin-bottom: 8px;">
+                                <span data-i18n="progress-label">研發進度達成率</span>
+                                <span id="dev-progress-percent" style="color: #10b981;">0%</span>
+                            </div>
+                            <div style="width: 100%; height: 10px; background: #111; border-radius: 5px; overflow: hidden; border: 1px solid var(--border-color);">
+                                <div id="dev-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #10b981, #3b82f6); transition: width 0.5s ease;"></div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 30px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 18px;">
+                            <!-- Pending Tasks -->
+                            <div style="flex: 1; background: rgba(251, 191, 36, 0.02); padding: 15px; border-radius: 8px; border: 1px solid rgba(251, 191, 36, 0.08);">
+                                <h4 style="color: #fbbf24; font-size: 14px; font-weight: 700; margin-top: 0; margin-bottom: 12px;" data-i18n="home-title-pending">進行中 / 待審任務</h4>
+                                <ul id="home-pending-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-family: var(--font-code);">
+                                    <!-- Rendered dynamically -->
+                                </ul>
+                            </div>
+                            <!-- Completed Tasks -->
+                            <div style="flex: 1; background: rgba(16, 185, 129, 0.02); padding: 15px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.08);">
+                                <h4 style="color: #10b981; font-size: 14px; font-weight: 700; margin-top: 0; margin-bottom: 12px;" data-i18n="home-title-completed">今日已完成項目</h4>
+                                <ul id="home-completed-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-family: var(--font-code);">
+                                    <!-- Rendered dynamically -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Doctor Self-Healing Logs (Full Width) -->
+                    <div class="card" style="padding: 25px; margin-bottom: 25px; border: 1px solid var(--border-color); border-radius: 12px; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 18px;">🩺</span>
+                                <h3 style="color: #f87171; margin: 0; font-size: 16px; font-weight: 700; letter-spacing: 0.5px;" data-i18n="home-sec-doctor">🩺 Doctor 自癒派遣中心 (Doctor Logs)</h3>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <button class="btn-submit" id="btn-remote-retry" style="background: #3b82f6; width: auto; padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; display: flex; align-items: center; gap: 4px;">🔄 任務重試 (Retry)</button>
+                                <button class="btn-submit" id="btn-remote-restart" style="background: #ef4444; width: auto; padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; display: flex; align-items: center; gap: 4px;">🚨 緊急重啟 (Restart)</button>
+                                <button class="btn-submit" id="btn-watchdog-toggle" style="background: linear-gradient(135deg, #a855f7, #7e22ce); width: auto; padding: 4px 12px; font-size: 11px; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; display: flex; align-items: center; gap: 4px;">🤖 自癒守護: ON</button>
+                                <span class="badge" id="doctor-status-badge" style="background: #10b981; color: white; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; letter-spacing: 0.5px;">STANDBY</span>
+                            </div>
+                        </div>
+                        <div class="goose-log-container" id="home-doctor-logs" style="background: #111; padding: 15px; border-radius: 8px; font-family: var(--font-code); font-size: 13px; color: #81c784; height: 200px; overflow-y: auto; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 6px;">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-projector">
+                    <div class="projector-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <span id="projector-file-name">Select a file from the workspace tree to project code...</span>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-submit" id="btn-clear-cache" style="width: auto; padding: 6px 14px; background: #a855f7; margin: 0;">🧹 清除編排快取 (Clear Cache)</button>
+                            <button class="btn-submit" id="btn-run-brick" style="width: auto; padding: 6px 14px; margin: 0; display: none;">🚀 Run Brick</button>
+                        </div>
+                    </div>
+                    <pre class="code-view"><code id="code-content"># Select a file from the workspace tree to display its content here...</code></pre>
+                </div>
+                
+                <div class="tab-content" id="tab-dfmea">
+                    <div class="table-container">
+                        <div class="table-actions-header" style="display: flex; gap: 10px;">
+                            <button class="btn-submit" id="btn-open-rule-modal" style="width: auto; padding: 8px 16px; margin-bottom: 15px;">＋ Add DFMEA Rule</button>
+                            <button class="btn-submit" id="btn-run-dfmea-audit" style="background: #10b981; width: auto; padding: 8px 16px; margin-bottom: 15px;">🧪 執行品質稽核 (Trigger Audit)</button>
+                            <button class="btn-submit" id="btn-db-backup" style="background: #f59e0b; width: auto; padding: 8px 16px; margin-bottom: 15px;">🗄️ 備份資料庫 (Backup DB)</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Problem Point</th>
+                                    <th>Failure Mode</th>
+                                    <th>Severity</th>
+                                    <th>Occurrence</th>
+                                    <th>Detection</th>
+                                    <th>RPN</th>
+                                    <th>Root Cause</th>
+                                    <th>Prevention</th>
+                                    <th>Corrective</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dfmea-table-body">
+                                <tr>
+                                    <td>FM-04</td>
+                                    <td>產出 pass/TODO 代碼</td>
+                                    <td>系統邏輯不閉環</td>
+                                    <td class="severity-high">9</td>
+                                    <td>推論懶惰</td>
+                                    <td>執行 DFMEA_Integrity_Gate 掃描</td>
+                                    <td>熔斷並拒絕寫入</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>ERR_001</td>
+                                    <td>LOGIC_OVERWRITE</td>
+                                    <td>未讀取舊檔直接覆寫檔案內容</td>
+                                    <td class="severity-medium">7</td>
+                                    <td>覆蓋關鍵程式區塊</td>
+                                    <td>比對關鍵區塊 Function 定義</td>
+                                    <td>禁止覆寫舊檔</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>ERR_002</td>
+                                    <td>INHERITANCE_LOSS</td>
+                                    <td>子類別繼承鏈中斷</td>
+                                    <td class="severity-high">8</td>
+                                    <td>缺 S3 熔斷機制呼叫</td>
+                                    <td>驗證 Central_Dispatcher 繼承關係</td>
+                                    <td>拒絕發送任務</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-console">
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <button class="btn-submit" id="btn-clear-console" style="width: auto; padding: 6px 14px; background: #6b7280; margin: 0;">🧹 清除畫面 (Clear Screen)</button>
+                        <button class="btn-submit" id="btn-push-logs-telegram" style="width: auto; padding: 6px 14px; background: #3b82f6; margin: 0;">📯 推送記錄至 Telegram (Push Logs)</button>
+                    </div>
+                    <div class="console-box" id="console-logs">
+                        <div class="log-line info">[INFO] [13:50:00] Doctor_Prime 核心引擎已啟動，已剔除無效 Security 模組參照。</div>
+                        <div class="log-line info">[INFO] [13:50:01] Swarm_Orchestrator imported successfully.</div>
+                        <div class="log-line success">[SUCCESS] [13:50:02] SQLite WAL mode check: PRAGMA journal_mode=WAL initialized successfully.</div>
+                        <div class="log-line success">[SUCCESS] [13:50:03] Pre-flight validation result: SUCCESS (Passed)</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="tab-cloud-hq">
+                    <div class="table-container">
+                        <h3 style="margin-top: 0; color: #60a5fa;" data-i18n="cloud-sync-title">☁️ Cloud Synchronization & Takeover Status</h3>
+                        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                            <button class="btn-submit" id="btn-force-cloud-sync" style="width: auto; padding: 8px 16px; background: #f59e0b; margin: 0;">🔄 強制雙活對齊 (Force Sync)</button>
+                        </div>
+                        <div class="grid" style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div class="card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; flex: 1;">
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px;" data-i18n="last-sync-label">Last Cloud Sync</div>
+                                <div style="font-size: 1.1rem; font-weight: bold;" id="cloud-last-sync">N/A</div>
+                            </div>
+                            <div class="card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; flex: 1;">
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px;" data-i18n="takeover-label">Cloud Takeover State</div>
+                                <div style="font-size: 1.1rem; font-weight: bold;" id="cloud-takeover-state">Inactive</div>
+                            </div>
+                            <div class="card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; flex: 1;">
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px;" data-i18n="mirror-label">HTML/CSV Mirrors</div>
+                                <div style="font-size: 1.1rem; font-weight: bold; color: #10b981;" id="cloud-mirrors-status">Generated</div>
+                            </div>
+                        </div>
+
+                        <h3 style="color: #38bdf8; margin-top: 25px;" data-i18n="tg-title">🤖 Telegram Remote Integration</h3>
+                        <div class="grid" style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div class="card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; flex: 1;">
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px;">Telegram Gateway</div>
+                                <div style="font-size: 1.1rem; font-weight: bold;" id="cloud-tg-status">Offline</div>
+                            </div>
+                            <div class="card" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; flex: 1;">
+                                <div style="font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px;">Authorized Chat ID</div>
+                                <div style="font-size: 1.1rem; font-weight: bold;" id="cloud-tg-chat-id">N/A</div>
+                            </div>
+                        </div>
+
+                        <h3 style="color: #6366f1; margin-top: 25px;" data-i18n="goose-title">🦢 Goose AI Execution & DFMEA Defense (Stage 3 & 4)</h3>
+                        <div class="goose-log-container" id="goose-log-container" style="background: #151515; padding: 15px; border-radius: 8px; font-family: var(--font-code); font-size: 12px; color: #81c784; height: 130px; overflow-y: auto; border: 1px solid var(--border-color); line-height: 1.5; display: flex; flex-direction: column; gap: 4px;">
+                            <div style="color: #888;">No execution logs found. System secure.</div>
+                        </div>
+
+                        <!-- Task Flow Visualizer -->
+                        <div class="task-flow-visualization" id="task-flow-viz" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-top: 25px; display: none;">
+                            <h4 style="color: #ffb300; margin-bottom: 20px; font-size: 14px; font-weight: 700; letter-spacing: 0.5px;" data-i18n="flow-title">🚀 任務編譯與生命週期追蹤 (Task Lifecycle Flow)</h4>
+                            <div class="flow-steps" id="flow-steps-container" style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                                <!-- Dynamically generated by app.js -->
+                            </div>
+                        </div>
+
+                        <h3 style="color: #f87171; margin-top: 25px;" data-i18n="sandbox-title">🛡️ AST Sandbox Blocked Drafts</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-i18n="th-task-id">Task ID</th>
+                                    <th data-i18n="th-script">Brick Script</th>
+                                    <th data-i18n="th-time">Blocked Timestamp</th>
+                                    <th data-i18n="th-status">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="blocked-scripts-table-body">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--text-dim);">No blocked scripts found. System secure.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 style="color: #fbbf24; margin-top: 30px;" data-i18n="hitl-title">🛡️ Supervisor Decision Center (HITL Queue)</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-i18n="th-task-id">Task ID</th>
+                                    <th data-i18n="th-action">Action / Script</th>
+                                    <th data-i18n="th-time">Queued Time</th>
+                                    <th data-i18n="th-decision">Supervisor Review Review</th>
+                                </tr>
+                            </thead>
+                            <tbody id="approvals-table-body">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--text-dim);">No tasks awaiting supervisor approval. System idle.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Tab: ClawLibrary 2D Office -->
+                <div class="tab-content" id="tab-clawlibrary" style="height: 720px; gap: 10px; padding: 15px; border-radius: 12px; background: rgba(9, 24, 22, 0.4); border: 1px solid var(--border-color);">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button class="btn-submit" id="btn-restart-claw" style="width: auto; padding: 6px 14px; background: #ef4444; margin: 0;">🔄 重啟辦室服務 (Restart ClawLibrary)</button>
+                        <span style="color: #9ca3af; font-size: 13px;">切換手動開關可自癒 Port 5188 進程</span>
+                    </div>
+                    <iframe src="http://localhost:5188/" style="width: 100%; flex: 1; border: none; background: #091110; border-radius: 8px;"></iframe>
+                </div>
+                <!-- Tab: Node-RED Dashboard -->
+                <div class="tab-content" id="tab-nodered" style="height: 720px; gap: 10px; padding: 15px; border-radius: 12px; background: rgba(24, 9, 9, 0.4); border: 1px solid var(--border-color);">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button class="btn-submit" id="btn-restart-nodered" style="width: auto; padding: 6px 14px; background: #ef4444; margin: 0;">🔄 重啟控制流服務 (Restart Node-RED)</button>
+                        <span style="color: #9ca3af; font-size: 13px;">切換手動開關可自癒 Port 1880 進程</span>
+                    </div>
+                    <iframe src="http://localhost:1880/ui/" style="width: 100%; flex: 1; border: none; background: #111; border-radius: 8px;"></iframe>
+                </div>
+
+                <!-- Tab: Universal Skills Generator -->
+                <div class="tab-content" id="tab-skills-generator">
+                    <div style="display: grid; grid-template-columns: 460px 1fr; gap: 20px;">
+                        <!-- Left Column: Generator Form -->
+                        <div class="card-glass" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px;">
+                            <h3 style="color: #60a5fa; margin-top: 0; margin-bottom: 15px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">🚀 AI 萬用技能造物</h3>
+                            <form id="skill-gen-form">
+                                <button type="button" id="btn-reload-assets" class="btn-submit" style="background: #3b82f6; width: auto; padding: 6px 14px; margin: 0 0 15px 0;">🔄 重載資產列表 (Reload Lists)</button>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">選擇各大平台 / 類別 (Platform)</label>
+                                    <select id="skill-platform" required style="width: 100%; height: 38px; background: #111827; border: 1px solid var(--border-color); color: #fff; padding: 0 10px; border-radius: 6px; font-family: inherit;">
+                                        <option value="starter_ai_agents">starter_ai_agents (新手入門代理)</option>
+                                        <option value="mcp_ai_agents">mcp_ai_agents (MCP智慧代理)</option>
+                                        <option value="advanced_ai_agents">advanced_ai_agents (進化版AI代理)</option>
+                                        <option value="always_on_agents">always_on_agents (常駐自動代理)</option>
+                                        <option value="generative_ui_agents">generative_ui_agents (生成式UI代理)</option>
+                                        <option value="voice_ai_agents">voice_ai_agents (語音聲控代理)</option>
+                                        <option value="rag_tutorials">rag_tutorials (RAG知識庫範例)</option>
+                                        <option value="advanced_llm_apps">advanced_llm_apps (進階大模型應用)</option>
+                                        <option value="agent_skills">agent_skills (Agent技能插槽)</option>
+                                        <option value="ai_agent_framework_crash_course">ai_agent_framework_crash_course (架構極速課程)</option>
+                                        <option value="docs">docs (技術文件生成)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">目標名稱 (Target Name, e.g. ai_pdf_summarizer)</label>
+                                    <input type="text" id="skill-target" placeholder="e.g. ai_custom_processor" required style="width: 100%; height: 38px; background: #111827; border: 1px solid var(--border-color); color: #fff; padding: 0 10px; border-radius: 6px; font-family: var(--font-code);">
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">規格與需求描述 (Specifications)</label>
+                                    <textarea id="skill-specs" rows="5" placeholder="請詳細說明您想讓此 Skill/Agent 實現的核心功能與處理步驟..." required style="width: 100%; background: #111827; border: 1px solid var(--border-color); color: #fff; padding: 10px; border-radius: 6px; font-family: inherit; resize: vertical;"></textarea>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">指定一人公司團隊承接經營 (Assign OPC Team)</label>
+                                    <select id="skill-team" style="width: 100%; height: 38px; background: #111827; border: 1px solid var(--border-color); color: #fff; padding: 0 10px; border-radius: 6px; font-family: inherit;">
+                                        <option value="None">不承接 (僅生成腳本)</option>
+                                        <option value="Standard Team">Standard Team (標準協同開發團隊)</option>
+                                        <option value="Security-Focused Team">Security-Focused Team (安全合規稽核團隊)</option>
+                                        <option value="Rapid-Prototyping Team">Rapid-Prototyping Team (快速原型小組)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">搭配現有技能 (Combine with Skills)</label>
+                                    <div id="skill-selector-list" style="max-height: 100px; overflow-y: auto; background: #111827; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; font-size: 12px;">
+                                        <div style="color: var(--text-dim); text-align: center; padding: 10px;">載入技能中...</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">搭配現有 SDK 積木 (Combine with Bricks)</label>
+                                    <div id="brick-selector-list" style="max-height: 100px; overflow-y: auto; background: #111827; border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; font-size: 12px;">
+                                        <div style="color: var(--text-dim); text-align: center; padding: 10px;">載入積木中...</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 20px;">
+                                    <label style="display: block; font-size: 12px; color: #9ca3af; margin-bottom: 5px;">參考附件上傳 (Attachment Reference)</label>
+                                    <input type="file" id="skill-attachment" style="width: 100%; font-size: 13px; color: #9ca3af;">
+                                </div>
+                                <button type="submit" id="btn-skill-gen-submit" class="btn-submit" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); width: 100%; font-weight: bold; height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px;">🚀 開始 AI 技能生成</button>
+                            </form>
+                        </div>
+                        
+                        <!-- Right Column: Skills Repository & Log Console -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <!-- Repository Table -->
+                            <div class="table-container" style="margin: 0; background: rgba(255, 255, 255, 0.01); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color);">
+                                <h3 style="color: #10b981; margin-top: 0; margin-bottom: 15px; font-size: 1.1rem;">📁 已生成萬用技能庫 (Skills Repository)</h3>
+                                <div style="max-height: 250px; overflow-y: auto;">
+                                    <table style="font-size: 13px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 60px;">ID</th>
+                                                <th>類別 (Platform)</th>
+                                                <th>目標名稱 (Target)</th>
+                                                <th style="width: 150px;">建立時間</th>
+                                                <th style="width: 180px; text-align: center;">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="skills-repo-body">
+                                            <tr>
+                                                <td colspan="5" style="text-align: center; color: var(--text-dim);">無已生成的技能。請從左側建立第一個技能！</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!-- Log Console -->
+                            <div class="console-box" style="height: 250px; margin: 0; border-radius: 12px; padding: 15px; background: #070f0e; border: 1px solid var(--border-color); display: flex; flex-direction: column;">
+                                <h4 style="color: #fbbf24; margin-top: 0; margin-bottom: 10px; font-size: 0.9rem; font-family: sans-serif;">📟 技能執行終端日誌 (Execution Logs)</h4>
+                                <div id="skill-exec-logs" style="flex: 1; overflow-y: auto; font-family: var(--font-code); font-size: 12px; line-height: 1.5; color: #a7f3d0; word-break: break-all;">
+                                    [System] 等待執行技能...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Pane: Telegram messenger -->
+        <section class="telegram-panel">
+            <div class="telegram-header">
+                <div class="tg-avatar">G</div>
+                <div class="tg-status-info">
+                    <h3 id="tg-agent-name" data-i18n="tg-agent-name">Gemini AI 即時處理與主管意見交流</h3>
+                    <span class="tg-status-online" id="tg-agent-status">online</span>
+                </div>
+            </div>
+            <div class="telegram-messages" id="chat-messages">
+                <div class="message-bubble received">
+                    <p>親愛的雋懋主管您好！我是您的專屬智能助理『志玲』。🌸 雙軌自癒架構與「圖書館為骨、積木為肉」部署已成功建立。請問今天想調度或檢查什麼積木模組？我們一起加油！</p>
+                    <span class="time">13:55</span>
+                </div>
+            </div>
+            <div class="telegram-input-bar">
+                <input type="text" id="chat-input" data-i18n="placeholder-chat" placeholder="輸入訊息給 Gemini (即時處理與意見交流)..." autocomplete="off">
+                <button id="btn-send" data-i18n="btn-send">Send</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Form: Add custom device -->
+    <div class="modal-overlay" id="device-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Add Dynamic Hardware Device</h2>
+                <button class="btn-close" id="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-device-form">
+                    <div class="form-group">
+                        <label for="device-name">Device Name</label>
+                        <input type="text" id="device-name" placeholder="e.g., PLC Controller 01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="device-type">Device Type</label>
+                        <select id="device-type">
+                            <option value="Controller">Controller</option>
+                            <option value="Sensor">Sensor</option>
+                            <option value="Actuator">Actuator</option>
+                            <option value="Robot">Robot</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="metric-label">Key Metric Name</label>
+                        <input type="text" id="metric-label" placeholder="e.g., Temperature / Frequency" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="metric-value">Key Metric Value</label>
+                        <input type="text" id="metric-value" placeholder="e.g., 45°C / 60Hz" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Add New Node</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form: Add/Edit DFMEA Rule -->
+    <div class="modal-overlay" id="rule-modal">
+        <div class="modal-box" style="width: 500px; max-width: 90%;">
+            <div class="modal-header">
+                <h2 id="rule-modal-title">Add/Edit DFMEA Rule</h2>
+                <button class="btn-close" id="btn-close-rule-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-rule-form">
+                    <input type="hidden" id="rule-action-mode" value="add">
+                    <div class="form-group">
+                        <label for="rule-id">Rule ID (Unique, e.g., ERR_005)</label>
+                        <input type="text" id="rule-id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rule-problem">Problem Point</label>
+                        <input type="text" id="rule-problem" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rule-mode">Failure Mode</label>
+                        <input type="text" id="rule-mode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rule-severity">Severity (1-10)</label>
+                        <input type="number" id="rule-severity" min="1" max="10" required>
+                    </div>
+                    <div class="form-group" style="display: flex; gap: 15px;">
+                        <div style="flex: 1;">
+                            <label for="rule-occurrence">Occurrence (1-10)</label>
+                            <input type="number" id="rule-occurrence" min="1" max="10" value="1" required>
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="rule-detection">Detection (1-10)</label>
+                            <input type="number" id="rule-detection" min="1" max="10" value="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="rule-cause">Root Cause</label>
+                        <input type="text" id="rule-cause" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rule-prevention">Prevention Action</label>
+                        <input type="text" id="rule-prevention" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rule-corrective">Corrective Action</label>
+                        <input type="text" id="rule-corrective" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Save Rule</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

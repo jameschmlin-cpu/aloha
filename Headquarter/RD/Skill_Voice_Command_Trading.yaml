@@ -1,0 +1,30 @@
+# C:\Genesis\Headquarter\Skills\Skill_Voice_Command_Trading.yaml
+Skill_Metadata:
+  Name: "Voice_Trading_Command_System"
+  Version: "1.0.0"
+  Hardware_Source: "S24_Ultra_Voice_Node"
+  Hash: "0xVOICE_COMMAND_READY"
+
+Antigravity_Logic:
+  # 意圖處理層
+  Voice_Intent_Parser:
+    Engine: "Local_LLM_Translation"
+    Task: "將語音文字轉換為 JSON 指令"
+    Examples:
+      - Command: "台積電買進一張"
+        Action: "BUY_SYMBOL_QTY"
+        Params: {"Symbol": "2330", "Qty": 1}
+
+  # 安全過濾層
+  Command_Validation:
+    Protocol: "Node_C_Verification_Required"
+    Step_1: "語音識別轉意圖"
+    Step_2: "Node_B 進行行情風險掃描"
+    Step_3: "Node_C 實體 Hash 簽署 (等待董事長在手機端確認語音內容)"
+
+  # 執行層
+  Security:
+    Safety_Breaker: "Voice_Panic_Button" # 支援語音輸入「熔斷」或「停止」即刻中斷 API 連結
+    Logging: "C:\Genesis\Logs\Voice_Command.log"
+
+# 使用方式：S24 Ultra 語音輸入 -> 轉文字送入 -> 自動執行校驗 -> 等待最終確認下單

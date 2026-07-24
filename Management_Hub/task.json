@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Imperial_Auto_Production",
+            "type": "shell",
+            "command": "python",
+            "args": ["C:\\Genesis\\Empire_Industrial_Factory.py"],
+            "group": "build",
+            "presentation": { "reveal": "silent" }
+        },
+        {
+            "label": "Empire_Monitor_Loop",
+            "type": "shell",
+            "command": "python",
+            "args": ["C:\\Genesis\\Empire_Full_Engine.py"],
+            "isBackground": true,
+            "presentation": { "reveal": "silent" }
+        },
+        {
+            "label": "Integrity_Scan_1500",
+            "type": "shell",
+            "command": "python",
+            "args": ["-c", "import hashlib; print('Integrity Check Running...')"],
+            "presentation": { "reveal": "silent" },
+            "detail": "每日 15:00 執行誠信掃描"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "龍蝦帝國 - 全自動對話框程式收攏工具",
+  "version": "1.0.0",
+  "description": "自動抓取 Gemini 對話框中的實體程式碼並無縫下沉至 ITE 本地端 SQLite 資料庫",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:5000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gemini.google.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

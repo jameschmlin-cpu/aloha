@@ -1,0 +1,7 @@
+{
+    "bot_token": "8144303458:AAHGMi7CNvuCMufSdWLpy5F0zdbxIB98W5M",
+    "authorized_chat_id": 7934519435,
+    "gemini_api_key": "AIzaSyCmRQX1c0ms02us_gfVExt6RiSAfHHzijQ",
+    "use_local_tts": true,
+    "development_mode": "LOCAL"
+}

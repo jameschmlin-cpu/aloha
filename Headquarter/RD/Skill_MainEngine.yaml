@@ -1,0 +1,18 @@
+skill_name: MainEngine
+class_name: MainEngine
+description: 未提供類別描述。
+methods:
+- name: log_event
+  description: 未提供方法描述。
+  parameters:
+  - name: action
+    type: Any
+  - name: status
+    type: Any
+- name: listen
+  description: 未提供方法描述。
+  parameters:
+  - name: command
+    type: Any
+auto_mount: true
+status: READY

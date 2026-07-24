@@ -1,0 +1,81 @@
+{
+    "dynamic_learning_conclusions": [
+        "大腦核心配置與地端血管全面校驗通車成功。",
+        "統帥擊發獨立思考指令『基地狀況』，志玲已同步外部電報網閘。"
+    ],
+    "system_meta": {
+        "window_title": "龍蝦帝國頂真控制台",
+        "top_header": "🏛️ 龍蝦部隊總部控制台 | [地端數據血管大通車] | 統帥: 林雋懋",
+        "api_mega_title": "👑 API-Mega 全能控制面板",
+        "rss_title": "📡 RSS 實時輪播",
+        "location_text": "臺灣台北總部 (ITE2)",
+        "host_title": "🖥️ 基地主機",
+        "squad_title": "Broccoli 龍蝦戰隊 (L1-L6)",
+        "wait_mesh_text": "👁️ 數據等待併網",
+        "chat_init_text": "治安官志玲已完成數據血管對齊，儀表板加固版全量開機！",
+        "input_placeholder": "輸入統帥指令...",
+        "send_btn_text": "發射",
+        "api_mega_buttons": [
+            {
+                "label": "金流控制",
+                "value": "金流"
+            },
+            {
+                "label": "考勤日曆",
+                "value": "萬年曆"
+            },
+            {
+                "label": "安全自檢",
+                "value": "安全"
+            },
+            {
+                "label": "公務數據",
+                "value": "公務數據"
+            },
+            {
+                "label": "環境監控",
+                "value": "監控"
+            },
+            {
+                "label": "電話通訊",
+                "value": "通訊"
+            }
+        ],
+        "hosts": [
+            {
+                "id": "ITE2",
+                "name": "ITE2 核心主機 (32GB)"
+            },
+            {
+                "id": "RTX3060",
+                "name": "RTX 3060 算力定錨"
+            }
+        ],
+        "squads": [
+            {
+                "id": "L1_研發",
+                "name": "L1 研發核心"
+            },
+            {
+                "id": "L2_供應鏈",
+                "name": "L2 內存防線"
+            },
+            {
+                "id": "L3_商業",
+                "name": "L3 長照核薪"
+            },
+            {
+                "id": "L4_治安",
+                "name": "L4 治安官志玲"
+            },
+            {
+                "id": "L5_成功",
+                "name": "L5 極簡產品"
+            },
+            {
+                "id": "L6_美感",
+                "name": "L6 算力糖果"
+            }
+        ]
+    }
+}

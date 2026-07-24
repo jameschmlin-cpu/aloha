@@ -1,0 +1,5 @@
+# 進度
+參考: [[ARCHITECTURE.md]]
+
+---
+Hash: e3e02403998342550c1ce7579df78bf11137d8c67a462770d9d7ad444d537e75

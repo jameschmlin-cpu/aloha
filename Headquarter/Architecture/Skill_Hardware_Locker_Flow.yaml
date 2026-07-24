@@ -1,0 +1,22 @@
+# C:\Genesis\Headquarter\Architecture\Skill_Hardware_Locker_Flow.yaml
+Skill_Metadata:
+  Name: "Hardware_Locker_Offline_Architecture"
+  Version: "1.0.0"
+  Status: "Architectural_Locked"
+  Hash: "0xOFFLINE_LOCKER_FLOW_READY"
+
+Operation_Flow:
+  Initialization_Phase:
+    Action: "Cloud_Download_and_Bind" # 初始下載與硬體鎖 (Locker) 綁定
+    Requirement: "Internet_Connected"
+    Result: "Local_Execution_Environment_Armed" # 程式本體完成與 UID 的物理加密結合
+
+  Steady_State_Phase:
+    Execution: "Native_Local_Run" # 本地運作，無需雲端握手
+    Security_Locker: "Hardware_Dongle_UID_Verification" # 本地啟動時，由 Dongle 進行離線認證
+    Logic: "UID + Local_Encrypted_Key = Execution_Signal"
+
+  Upgrade_Protocol:
+    Trigger: "Feature_Expansion_or_Tier_Upgrade"
+    Action: "Re_Handshake_with_Cloud" # 僅在升級 (Gen 1->2 或基本->旗艦) 時執行握手
+    Mechanism: "Signal_Injection" # 雲端下發加密訊號，更新本地鎖定邏輯

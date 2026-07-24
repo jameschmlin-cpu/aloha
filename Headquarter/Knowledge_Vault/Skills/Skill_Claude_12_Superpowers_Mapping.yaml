@@ -1,0 +1,48 @@
+# C:\Genesis\Headquarter\Knowledge_Vault\Skills\Skill_Claude_12_Superpowers_Mapping.yaml
+Skill_Metadata:
+  Name: "Claude_Superpower_Matrix"
+  Version: "1.0.0"
+  Source_Material: "image_2.png"
+  Status: "Integrated_Into_Genesis_Library"
+  Hash: "0xCLAUDE_POWERS_MAPPED_READY"
+
+Superpower_Mapping_Registry:
+  # 對應 Gen3 (金融) 與 Gen4 (專家)
+  Cognitive_Analysis_Cluster:
+    - Power_ID: "1_Long_Document_Analysis"
+      Genesis_Skill: "Core_Knowledge_Extraction" # 應用於Gen4讀取合約/報告
+    - Power_ID: "2_Deep_Research"
+      Genesis_Skill: "Autonomous_Market_Research" # 應用於Gen3/4深度調研
+    - Power_ID: "8_Data_Interpretation"
+      Genesis_Skill: "Automated_Data_Visualization" # 應用於Gen3金融圖表產出
+
+  # 對應 Gen4 (專家) 與 Gen5 (長照)
+  Creation_Synthesis_Cluster:
+    - Power_ID: "3_Professional_Writing"
+      Genesis_Skill: "Automated_Professional_Doc_Gen" # 自動產出計畫書/合約
+    - Power_ID: "4_Prompt_Engineering"
+      Genesis_Skill: "Meta_Prompt_Optimizer" # Agent 自我優化提示詞
+    - Power_ID: "6_Strategic_Thinking"
+      Genesis_Skill: "Strategic_Decision_Tree_Engine" # 應用於Gen4商業決策
+
+  # 對應 Gen1 (生活) 與 Gen2 (IT)
+  Technical_Execution_Cluster:
+    - Power_ID: "5_Code_Understanding"
+      Genesis_Skill: "Native_Code_Interpreter_Block" # 應用於Gen2自動修復
+    - Power_ID: "7_Workflow_Design"
+      Genesis_Skill: "Automated_SOP_Blueprint" # 應用於Gen1生活流程優化
+    - Power_ID: "9_Learning_Accelerator"
+      Genesis_Skill: "Personalized_Knowledge_Graph_Gen" # 應用於Gen5長照學習紀錄
+
+  # 對應 Gen4 (變現) 與 Gen5 (長照)
+  Knowledge_Management_Cluster:
+    - Power_ID: "10_Decision_Support"
+      Genesis_Skill: "Comparison_Logic_Engine" # 應用於Gen4/5多方案決策
+    - Power_ID: "11_Content_Repurposing"
+      Genesis_Skill: "Cross_Platform_Content_Studio" # 應用於Gen4內容變現
+    - Power_ID: "12_Knowledge_Organization"
+      Genesis_Skill: "Structured_Database_Builder" # 應用於Gen4/5知識庫管理
+
+Operational_Protocol:
+  Inheritance: "All_Skills_Inheritable_By_Gen1_to_Gen5"
+  Security: "Secured_Within_Genesis_Native_SDK"

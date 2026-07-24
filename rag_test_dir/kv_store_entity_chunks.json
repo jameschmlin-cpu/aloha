@@ -1,0 +1,20 @@
+{
+  "Genesis": {
+    "chunk_ids": [
+      "doc-ca50cbaa520af731c12f0f42186fe08d-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1784739814,
+    "update_time": 1784739814,
+    "_id": "Genesis"
+  },
+  "Enterprise Operations": {
+    "chunk_ids": [
+      "doc-ca50cbaa520af731c12f0f42186fe08d-chunk-000"
+    ],
+    "count": 1,
+    "create_time": 1784739814,
+    "update_time": 1784739814,
+    "_id": "Enterprise Operations"
+  }
+}

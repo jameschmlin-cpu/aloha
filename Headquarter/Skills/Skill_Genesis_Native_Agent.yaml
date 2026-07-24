@@ -1,0 +1,26 @@
+# C:\Genesis\Headquarter\Skills\Skill_Genesis_Native_Agent.yaml
+Skill_Metadata:
+  Name: "Genesis_Native_Agent_Engine"
+  Version: "2.0.0"
+  Architecture: "Self_Defined_SDK_Native"
+  Hash: "0xGENESIS_NATIVE_READY"
+
+Native_Agent_Architecture:
+  # Agent 的基底，不再依賴外部框架
+  Kernel:
+    Logic_Executor: "Custom_Lightweight_Dispatcher" # 自定義的輕量級排程器
+    Communication: "Raw_Socket_Handshake"          # 直接與加密鎖握手，不經中間件
+    Signal_Verification: "Cloud_Hash_Sync"         # 驗證雲端喚醒訊號
+
+  # SDK 插拔介面定義
+  SDK_Plugin_Interface:
+    Interface_Type: "Standardized_Hook"
+    Rules:
+      - "Must_Check_Auth_Signal"
+      - "Must_Report_Status_To_Node_C"
+      - "Must_Support_Offline_Fallback"
+
+  # 資源管理
+  Deployment:
+    Format: "Encrypted_Binary_Payload"
+    Storage: "C:\Genesis\Library_Vault"

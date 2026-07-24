@@ -1,0 +1,9 @@
+skill_name: RDAgent
+class_name: RDAgent
+description: 未提供類別描述。
+methods:
+- name: run
+  description: 未提供方法描述。
+  parameters: []
+auto_mount: true
+status: READY

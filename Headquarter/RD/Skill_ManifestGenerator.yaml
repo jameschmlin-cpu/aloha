@@ -1,0 +1,14 @@
+skill_name: ManifestGenerator
+class_name: ManifestGenerator
+description: 未提供類別描述。
+methods:
+- name: get_file_hash
+  description: 計算檔案的 SHA-256 Hash 值 (SDK 4 Stages 剛性規範)
+  parameters:
+  - name: filepath
+    type: Any
+- name: run
+  description: 未提供方法描述。
+  parameters: []
+auto_mount: true
+status: READY

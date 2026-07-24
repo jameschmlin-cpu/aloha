@@ -1,0 +1,36 @@
+# ==============================================================================
+# Skill ID: Skill_Voice_Assistant
+# Status: READY_TO_MOUNT
+# ==============================================================================
+
+skill_manifest:
+  name: "Voice_Assistant_Agent"
+  version: "1.0.0"
+  description: "基於開源語音識別與LLM對話的語音助理"
+  
+  # 對接路徑：指向剛剛下載的軍火庫
+  target_module: "C:\Genesis\awesome-llm-apps\voice_assistant_module"
+  
+  # 原子化技能映射
+  atomic_skills:
+    - "Speech_to_Text_Recognition"
+    - "LLM_Response_Synthesis"
+    - "Text_to_Speech_Output"
+  
+  # 剛性安全對接
+  safety_protocol:
+    node_verification: "Node_D_Executor_Authorized"
+    integrity_hash: "REQUIRED_BY_MAIN_ENGINE"
+
+# CEO 調度參數
+orchestration:
+  priority: "High"
+  deployment_mode: "Lazy_Load"
+  subagent_role: "Interface_Controller"
+
+# 擴充模組：摘要落地機制 (Summary_Persistence)
+persistence_layer:
+  target_file: "C:\Genesis\Headquarter\Output\Summary.txt"
+  format: "Markdown"
+  mode: "Overwrite" # 每次執行更新最新摘要
+  node_verification: "Node_D_Executor_Authorized" # 確保寫入權限由 Node D 核可

@@ -1,0 +1,19 @@
+{
+  "doc-ca50cbaa520af731c12f0f42186fe08d": {
+    "content": "Genesis is an AI-powered auto-healing ecosystem created for enterprise operations.",
+    "file_path": "unknown_source",
+    "parse_format": "raw",
+    "content_hash": "ca50cbaa520af731c12f0f42186fe08d",
+    "chunk_options": {
+      "chunk_token_size": 1200,
+      "fixed_token": {
+        "split_by_character": null,
+        "split_by_character_only": false,
+        "chunk_overlap_token_size": 100
+      }
+    },
+    "create_time": 1784739519,
+    "update_time": 1784739519,
+    "_id": "doc-ca50cbaa520af731c12f0f42186fe08d"
+  }
+}

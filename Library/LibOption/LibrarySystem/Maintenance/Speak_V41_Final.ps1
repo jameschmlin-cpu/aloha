@@ -1,0 +1,1 @@
+﻿param([string]$Path = "C:\ITE\Hermes\Library\Audio\Chiling_Final_Soul.mp3"); Add-Type -AssemblyName presentationCore; $mediaPlayer = New-Object System.Windows.Media.MediaPlayer; $mediaPlayer.Open((New-Object System.Uri -ArgumentList $Path)); $mediaPlayer.Play(); Start-Sleep -Seconds 5; $mediaPlayer.Stop()

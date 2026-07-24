@@ -1,0 +1,74 @@
+Version: '2.0'
+Assets:
+  CEO_Agent_Template.yaml:
+    path: C:\Genesis\Headquarter\RD\CEO_Agent_Template.yaml
+    hash: e7031046ffa5
+    status: REGISTERED
+  CEO_Control_Center.yaml:
+    path: C:\Genesis\Headquarter\RD\CEO_Control_Center.yaml
+    hash: ac836bc17300
+    status: REGISTERED
+  GitHub_Importer.py:
+    path: C:\Genesis\Headquarter\RD\GitHub_Importer.py
+    hash: e34b114ea437
+    status: REGISTERED
+  Main_Engine.py:
+    path: C:\Genesis\Headquarter\RD\Main_Engine.py
+    hash: 20f997fc63a4
+    status: REGISTERED
+  Manifest.yaml:
+    path: C:\Genesis\Headquarter\RD\Manifest.yaml
+    hash: 58eedb4566c6
+    status: REGISTERED
+  Skill_00.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_00.yaml
+    hash: 49987e510ee8
+    status: REGISTERED
+  Skill_01.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_01.yaml
+    hash: af0d8d963a0d
+    status: REGISTERED
+  Skill_02.py:
+    path: C:\Genesis\Headquarter\RD\Skill_02.py
+    hash: ab171641ec16
+    status: REGISTERED
+  Skill_03.py:
+    path: C:\Genesis\Headquarter\RD\Skill_03.py
+    hash: 09e1500bcd77
+    status: REGISTERED
+  Skill_04.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_04.yaml
+    hash: 82039ed1e638
+    status: REGISTERED
+  Skill_05.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_05.yaml
+    hash: 0ecf884ec936
+    status: REGISTERED
+  Skill_06.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_06.yaml
+    hash: a95c412aad2a
+    status: REGISTERED
+  Skill_07.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_07.yaml
+    hash: f58d711718d6
+    status: REGISTERED
+  Skill_08.py:
+    path: C:\Genesis\Headquarter\RD\Skill_08.py
+    hash: 3eb3e4044325
+    status: REGISTERED
+  Skill_09.py:
+    path: C:\Genesis\Headquarter\RD\Skill_09.py
+    hash: a00d71658b7c
+    status: REGISTERED
+  Skill_10.py:
+    path: C:\Genesis\Headquarter\RD\Skill_10.py
+    hash: 1e8a7bcde542
+    status: REGISTERED
+  Skill_11.py:
+    path: C:\Genesis\Headquarter\RD\Skill_11.py
+    hash: 0bcc08b681bf
+    status: REGISTERED
+  Skill_Voice_Assistant.yaml:
+    path: C:\Genesis\Headquarter\RD\Skill_Voice_Assistant.yaml
+    hash: dfaeb044b2ba
+    status: REGISTERED

@@ -1,0 +1,15 @@
+import os
+import json
+
+# 補全記憶庫路徑
+paths = [
+    r"C:\Genesis\SDK\memory\specs",
+    r"C:\Genesis\SDK\memory\projects",
+    r"C:\Genesis\SDK\memory\history"
+]
+
+for path in paths:
+    os.makedirs(path, exist_ok=True)
+    with open(os.path.join(path, "__init__.py"), "w") as f:
+        pass # 確保為 Package
+print("[OK] 記憶庫路徑結構已建置完成。")

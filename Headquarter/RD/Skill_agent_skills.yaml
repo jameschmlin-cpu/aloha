@@ -1,0 +1,4 @@
+auto_mount: true
+path: C:\Genesis\awesome-llm-apps\agent_skills
+skill_name: agent_skills
+status: READY

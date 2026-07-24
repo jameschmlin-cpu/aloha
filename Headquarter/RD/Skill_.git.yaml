@@ -1,0 +1,4 @@
+auto_mount: true
+path: C:\Genesis\awesome-llm-apps\.git
+skill_name: .git
+status: READY

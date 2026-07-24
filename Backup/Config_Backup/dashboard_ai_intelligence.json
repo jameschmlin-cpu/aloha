@@ -1,0 +1,772 @@
+{
+    "timestamp": "2026-07-24 00:06:29",
+    "total_analyzed_modules": 51,
+    "ai_status": "運行中 (Active)",
+    "modules_catalog": [
+        {
+            "file_name": "Auto_Summarizer.py",
+            "path": "Management_Hub\\Auto_Summarizer.py",
+            "category": "辅助工具",
+            "ai_best_use_case": "在需要对大量文本进行快速总结和记录时使用，例如会议记录、日志分析等。",
+            "readiness_score": 100,
+            "short_description": "一个简单的自动摘要工具，用于将对话重点写入日志并检查SDK砖块的完整性。",
+            "dependencies": [
+                "os",
+                "datetime",
+                "hashlib"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:03"
+        },
+        {
+            "file_name": "Blueprint_Engine.py",
+            "path": "Management_Hub\\Blueprint_Engine.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "在需要進行自動化任務執行的情境中使用，如每日數據整理、系統維護等",
+            "readiness_score": 100,
+            "short_description": "一個用於運行自動化任務的引擎模組",
+            "dependencies": [
+                "task.json"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:03"
+        },
+        {
+            "file_name": "dashboard_ai_monitor.py",
+            "path": "Management_Hub\\dashboard_ai_monitor.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統發生異常或需要快速診斷時，通過監控和自癒引擎來及時發現並解決問題。",
+            "readiness_score": 100,
+            "short_description": "此模組用於監控AI系統的健康狀態，並在必要時生成DFMEA規則以進行故障排除。",
+            "dependencies": [
+                "GeminiAgent",
+                "Genesis_DFMEA.db",
+                "telegram_config.json"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:03"
+        },
+        {
+            "file_name": "dashboard_ai_orchestrator.py",
+            "path": "Management_Hub\\dashboard_ai_orchestrator.py",
+            "category": "AI 智慧程式編排與多工工具鏈協同引擎",
+            "ai_best_use_case": "用於智慧監控和系統管理，特別適合需要高效管理和調度多個AI工作流程的場景。",
+            "readiness_score": 100,
+            "short_description": "用於管理、調度和編排多個AI工作流程的工具，包括圖譜Grounding對接、Ruff靜態防禦代碼檢驗和LLM呼叫核心。",
+            "dependencies": [
+                "Gemini_Agent",
+                "langgraph.graph.StateGraph",
+                "diskcache.Cache",
+                "prefect.flow",
+                "prefect.task"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "DB_Maintenance.py",
+            "path": "Management_Hub\\DB_Maintenance.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "當需要定期清理和重組SQLite數據庫以釋放空間並刪除過期數據時。",
+            "readiness_score": 100,
+            "short_description": "執行資料庫空間重組及刪除30天前的過期診斷日誌。",
+            "dependencies": [
+                "sqlite3",
+                "time"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "DB_Maintenance_Auto.py",
+            "path": "Management_Hub\\DB_Maintenance_Auto.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在系統維護過程中，定期自動化執行數據庫清理和優化操作，以提高數據庫性能和可靠性。",
+            "readiness_score": 100,
+            "short_description": "此模組自動化執行數據庫的清理和優化，包括刪除過期資料和執行 VACUUM 操作。",
+            "dependencies": [
+                "sqlite3",
+                "time"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "DB_Path_Validator.py",
+            "path": "Management_Hub\\DB_Path_Validator.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在軟體更新或維護期間，確保所有相關程式碼中的數據庫路徑已正確更新，以防止連接失敗。",
+            "readiness_score": 100,
+            "short_description": "檢查指定目錄下所有 Python 文件中是否存在舊的數據庫路徑，並將其替換為新的數據庫路徑。",
+            "dependencies": [
+                "os"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Deep_Scan.py",
+            "path": "Management_Hub\\Deep_Scan.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "當需要對大型項目或多個Python腳本進行邏輯分析和報告生成時",
+            "readiness_score": 100,
+            "short_description": "一個用於深度邏輯掃描的Python腳本，可以解析项目中的Python文件并生成包含函数和类名的報告",
+            "dependencies": [
+                "os",
+                "ast"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Dependency_Inspector.py",
+            "path": "Management_Hub\\Dependency_Inspector.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "在軟件開發和維護過程中，用於分析和整理代碼相依性，幫助開發團隊更好地理解和優化代碼結構。",
+            "readiness_score": 100,
+            "short_description": "Dependency_Inspector.py 是一個用於檢測和記錄項目中所有 Python 文件的相依性（导入的模塊和繼承的類）的工具。它生成一個 JSON 报告，顯示每個文件的相依關係。",
+            "dependencies": [
+                "ast",
+                "json",
+                "pathlib"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Doctor.py",
+            "path": "Management_Hub\\Doctor.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統運行時定期檢查和修復邏輯缺陷，保障系統安全與穩定性",
+            "readiness_score": 100,
+            "short_description": "Doctor 模組會自動檢查核心邏輯文件的健康狀態，並在發現問題時進行修復",
+            "dependencies": [
+                "sys",
+                "os",
+                "shutil",
+                "ast"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "DoctorOrg.py",
+            "path": "Management_Hub\\DoctorOrg.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統出現異常或可能導致故障的情況下，自動執行診斷和修復操作，以確保系統的穩定運行。",
+            "readiness_score": 100,
+            "short_description": "DoctorOrg.py 是一個系統防護工具，能夠自動診斷並修復系統異常，保障系統的穩定性。",
+            "dependencies": [
+                "Core_Gateway",
+                "Registry_Manager",
+                "Backup_Engine",
+                "DFMEA_Monitor",
+                "Guardian_Bot",
+                "20class.Lifecycle_Hook"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Doctor_Prime_2.py",
+            "path": "Management_Hub\\Doctor_Prime_2.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在關鍵系統啟動或運行時，確保系統符合DFMEA風險評估標準，防止邏輯失敗和不閉環。",
+            "readiness_score": 100,
+            "short_description": "Doctor_Prime_2.py 為一個整合了DFMEA风险評估的強化版守護核心，用於強制執行風險監控和閉鎖熔斷。",
+            "dependencies": [
+                "Doctor_Prime",
+                "DFMEA_Engine",
+                "DFMEAUnifiedGate"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Empire_Nexus.py",
+            "path": "Management_Hub\\Empire_Nexus.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在系統維護或更新時，自動化知識庫的更新和數據同步",
+            "readiness_score": 100,
+            "short_description": "Empire_Nexus.py 是一個用於加載圖書館模組並將知識注入到共享知識庫的腳本。",
+            "dependencies": [
+                "sqlite3",
+                "datetime"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Empire_Resource_Governor.py",
+            "path": "Management_Hub\\Empire_Resource_Governor.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "用於實體資源管理、異常監測及自動清理，以防止系統過熱和資源耗盡。",
+            "readiness_score": 100,
+            "short_description": "此模組負責監視系統資源使用情況，並在必要時進行清理和通知，確保系統穩定運行。",
+            "dependencies": [
+                "psutil",
+                "subprocess",
+                "sys",
+                "os",
+                "GenesisDBFactory",
+                "Telegram_Gateway.js"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Gemini_Command_Center.py",
+            "path": "Management_Hub\\Gemini_Command_Center.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在關鍵任務執行前，確保代碼無語法錯誤及邏輯完整性，以防止潜在漏洞和故障發生。",
+            "readiness_score": 100,
+            "short_description": "Gemini_Command_Center.py 負責執行任務、更新引擎配置並生成實體 Hash 等操作，確保系統在關鍵任務中的穩定運行。",
+            "dependencies": [
+                "Genesis.Base_Temple",
+                "Genesis.Core_Gateway"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Gemini_Command_Center_2.py",
+            "path": "Management_Hub\\Gemini_Command_Center_2.py",
+            "category": "核心智慧路由",
+            "ai_best_use_case": "在系統初始化或重大配置變更時，確保所有組件正常運行並生成實體 Hash 證書以驗證完整性。",
+            "readiness_score": 100,
+            "short_description": " Gemini_Command_Center_3.py 為核心智慧路由的管理工具，負責系統初始化、安全配置更新及任務執行。",
+            "dependencies": [
+                "Genesis_Core.Base_Temple",
+                "Genesis_Core.Core_Gateway"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Gemini_Command_Center_3.py",
+            "path": "Management_Hub\\Gemini_Command_Center_3.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在關鍵系統運行時提供24/7的監控和保護，防止意外停機或安全威脅。",
+            "readiness_score": 100,
+            "short_description": "一個終極強固的命令中心，用於運行關鍵系統並提供持續監控。",
+            "dependencies": [
+                "Base_Temple",
+                "Core_Gateway"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Gemini_Command_Center_OLD.py",
+            "path": "Management_Hub\\Gemini_Command_Center_OLD.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "系統維護和管理",
+            "readiness_score": 100,
+            "short_description": "Gemini_Command_Center 是一個用於管理和控制 Engine 的工具，支持任務執行、邏輯更新和自定义逻辑注入。",
+            "dependencies": [
+                "Agent_Orchestrator",
+                "json"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Env_Patcher.py",
+            "path": "Management_Hub\\Genesis_Env_Patcher.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統環境出現異常或需要維護時，自動啟動以修復環境基礎建設問題。",
+            "readiness_score": 100,
+            "short_description": "Genesis 環境修復器自動化修復系統命名空間和實體檔案的問題。",
+            "dependencies": [
+                "os"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Guard.py",
+            "path": "Management_Hub\\Genesis_Guard.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在應用程序部署或更新後，自動檢查SDK的一致性和完整性",
+            "readiness_score": 100,
+            "short_description": " Genesis_Guard.py 提供了一個工具來計算文件的 SHA-256 散列值並記錄操作日誌",
+            "dependencies": [
+                "hashlib"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Listener.py",
+            "path": "Management_Hub\\Genesis_Listener.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在開發環境中，當有新的代碼塊需要被確認和存儲時，可以使用Genesis_Listener.py來自動將代碼塊保存到指定的SDK庫中，並進行SHA-256完整性校驗。",
+            "readiness_score": 100,
+            "short_description": "Genesis_Listener.py是一個用於自動將代碼塊保存到SDK庫中的工具，並進行完整性校驗。",
+            "dependencies": [
+                "hashlib"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Sanitizer.py",
+            "path": "Management_Hub\\Genesis_Sanitizer.py",
+            "category": "辅助工具",
+            "ai_best_use_case": "在软件开发和部署过程中，特别是在处理大量Python脚本或库时，以确保代码的一致性和可执行性。",
+            "readiness_score": 100,
+            "short_description": "清理和修复Python文件中的BOM标记和Unicode转义错误，提高代码的兼容性和安全性。",
+            "dependencies": [
+                "os",
+                "sys",
+                "subprocess",
+                "json"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Watchdog.py",
+            "path": "Management_Hub\\Genesis_Watchdog.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在關鍵服務或應用程序發生故障時，自動重啟和維護其正常運作",
+            "readiness_score": 100,
+            "short_description": "監控文件系統並自動重啟關鍵服務，如儀表板和 Telegram 遠程通訊模組。",
+            "dependencies": [
+                "watchdog",
+                "sqlite3",
+                "subprocess",
+                "urllib.request"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Watchdog2.py",
+            "path": "Management_Hub\\Genesis_Watchdog2.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "於系統異常或服務未回應時，自動進行重啟和恢復操作，確保核心服務的連續運行。",
+            "readiness_score": 100,
+            "short_description": "此模組負責監視和維護系統核心服務的正常運行，包括儀表板服務和Telegram通訊模組，並在異常時自動重啟。",
+            "dependencies": [
+                "dashboard_server.py",
+                "telegram_config.json"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Genesis_Watcher.py",
+            "path": "Management_Hub\\Genesis_Watcher.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "當需要實時監控和同步特定目錄下的文件變更，以確保所有相關文件的路徑在數據庫中保持最新時。",
+            "readiness_score": 100,
+            "short_description": "一個基於文件監視器的模組，用於實時同步和更新指定目錄下指定類型文件的物理路徑到數據庫中。",
+            "dependencies": [
+                "os",
+                "sqlite3",
+                "time",
+                "watchdog.observers.Observer",
+                "watchdog.events.FileSystemEventHandler"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "local_tts.py",
+            "path": "Management_Hub\\local_tts.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "在無網路環境下進行本地化語音合成，適合於遠程或離線場景中的通訊需求",
+            "readiness_score": 100,
+            "short_description": "一個本機的 SAPI5 語音合成腳本，用於將文本轉換為本地化的波形音频文件",
+            "dependencies": [
+                "win32com.client"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Log_Health_Monitor.py",
+            "path": "Management_Hub\\Log_Health_Monitor.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "當系統或任務出現異常或錯誤時，自動檢測並修復問題，提升系統穩定性和可靠性。",
+            "readiness_score": 100,
+            "short_description": "Log_Health_Monitor.py 負責系統日誌監控和自癒，自動檢測任務失敗並修復相關錯誤。",
+            "dependencies": [
+                "Doctor.py",
+                "sqlite3",
+                "urllib.request"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "MD_Enforcer.py",
+            "path": "Management_Hub\\MD_Enforcer.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "在程式碼生成或修改過程中，需要強制執行特定規範或標準時使用。",
+            "readiness_score": 100,
+            "short_description": "檢查程式碼是否符合 MD 憲法規範，防止未達標準的代碼生成。",
+            "dependencies": [
+                "os"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Memory_Guardian.py",
+            "path": "Management_Hub\\Memory_Guardian.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統記憶體使用接近臨界點時，防止系統過度負載並觸發緊急關閉。",
+            "readiness_score": 100,
+            "short_description": "Memory_Guardian.py 是一個用於監控系統記憶體使用率並在接近臨界點時觸發緊急保護措施的腳本。",
+            "dependencies": [
+                "sys",
+                "time",
+                "psutil",
+                "DB_Connector"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Memory_Sync_Guard.py",
+            "path": "Management_Hub\\Memory_Sync_Guard.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在系統運行過程中，定期檢查和同步記憶體中的數據，確保數據的一致性和完整性。",
+            "readiness_score": 100,
+            "short_description": "一個監控腳本，用於定期檢查指定目錄中文件的哈希值，以確保數據的完整性和一致性。",
+            "dependencies": [
+                "hashlib",
+                "os",
+                "time",
+                "logging",
+                "sys",
+                "threading"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Path_Migrator.py",
+            "path": "Management_Hub\\Path_Migrator.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在大型軟件項目中進行路徑遷徙時，以確保所有相關文件的路徑一致性和完整性。",
+            "readiness_score": 100,
+            "short_description": "Path_Migrator.py 負責將指定目錄下的所有 `.py` 文件中的路徑從舊路徑替換為新路徑，並驗證遷移前後的文件內容是否一致。",
+            "dependencies": [
+                "os",
+                "hashlib"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Pre_Flight_Check.py",
+            "path": "Management_Hub\\Pre_Flight_Check.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統啟動前進行檢查，確保所有必要目錄存在且配置正確，以防止後續運行中出現問題。",
+            "readiness_score": 100,
+            "short_description": "執行環境檢查和積木庫完整性掃描，確保系統就緒運行。",
+            "dependencies": [
+                "os",
+                "sys",
+                "hashlib"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "QC_Watcher.py",
+            "path": "Management_Hub\\QC_Watcher.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在機器人或自動化系統中進行背景校驗和安全監控，以及時發現和處理潛在的風險操作。",
+            "readiness_score": 100,
+            "short_description": "QC_Watcher.py 用於執行系統的背景校驗、安全監控以及柔性告警，確保自動化任務的安全性。",
+            "dependencies": [
+                "os",
+                "sys",
+                "time",
+                "json",
+                "sqlite3",
+                "urllib.request"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "RCAF_Manager.py",
+            "path": "Management_Hub\\RCAF_Manager.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在發生異常或錯誤時，保護系統免受進一步損壞",
+            "readiness_score": 100,
+            "short_description": "RCAF_Manager 類別提供了一種機制來運行其他函數並處理可能出現的錯誤，確保系統的健壯性",
+            "dependencies": [
+                "DFMEA"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Repair_Databases.py",
+            "path": "Management_Hub\\Repair_Databases.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "當需要定期檢查和修復數據庫結構以確保數據完整性和一致性時，可以使用此工具。",
+            "readiness_score": 100,
+            "short_description": "自動修復指定路徑下所有SQLite數據庫的表結構，確保符合預定義的標準化格式。",
+            "dependencies": [
+                "sqlite3",
+                "os"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Salary_SOP_Engine.py",
+            "path": "Management_Hub\\Salary_SOP_Engine.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "企業在處理薪資計算時，需要自動化和標準化的流程來提高效率和準確性。",
+            "readiness_score": 100,
+            "short_description": "SalarySOPEngine.py 負責加載和處理薪資數據，自動化薪酬計算邏輯。",
+            "dependencies": [
+                "pandas",
+                "os"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "selector_routing_table.py",
+            "path": "Management_Hub\\selector_routing_table.py",
+            "category": "核心智慧路由",
+            "ai_best_use_case": "在關鍵系統資源出現異常時，迅速識別並應對，保障系統穩定運行",
+            "readiness_score": 100,
+            "short_description": "提供多種路由表，用於管理各系統模塊之間的通信和數據轉發",
+            "dependencies": [
+                "Empire_Resource_Governor.py",
+                "Memory_Guardian.py",
+                "Memory_Sync_Guard.py",
+                "Watcher.py",
+                "Doctor.py",
+                "Command_Dispatcher.py",
+                "Genesis_Sync_Daemon.py",
+                "Log_Health_Monitor.py",
+                "QC_Watcher.py",
+                "genesis_closed_loop_optimizer.py",
+                "genesis_safety_referee.py",
+                "LangGraph_Core.py",
+                "LightRAG_Engine.py"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Self_Repair_Master.py",
+            "path": "Management_Hub\\Self_Repair_Master.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "當系統出現通訊或數據庫故障時，進行自動修復以維持系統運作",
+            "readiness_score": 100,
+            "short_description": "執行物理修復操作，檢查並恢復系統功能",
+            "dependencies": [
+                "Genesis_Core.DFMEA_Engine"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "telegram_bot_daemon.py",
+            "path": "Management_Hub\\telegram_bot_daemon.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在關鍵時刻（如設備故障或異常）提供即時通知和維修指引",
+            "readiness_score": 100,
+            "short_description": "此模組用於監控Genesis系統的健康狀態，包括GPU、CPU、RAM使用情況及SQLite數據庫連接狀態。它還提供了在關鍵時刻發送警報的功能。",
+            "dependencies": [
+                "nvidia-smi",
+                "psutil",
+                "sqlite3"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Verify_History.py",
+            "path": "Management_Hub\\Verify_History.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在系統需要驗證和確認最新數據時使用，例如在數據庫更新後，自動檢查是否有新數據生成。",
+            "readiness_score": 100,
+            "short_description": "用於驗證和顯示數據庫中最新的記錄。",
+            "dependencies": [
+                "sqlite3"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:16"
+        },
+        {
+            "file_name": "Core_Logic.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Core_Logic.py",
+            "category": "核心智慧路由",
+            "ai_best_use_case": "在系統初始化或物理層命令執行時，確保Webmcp通道保持運作並掛載SDK",
+            "readiness_score": 100,
+            "short_description": "管理物理層命令，初始化Webmcp接管通道",
+            "dependencies": [
+                "subprocess"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:03:38"
+        },
+        {
+            "file_name": "Gemini_Secretary.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Gemini_Secretary.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統運行時進行實時對話監控和日誌記錄，以提高系統的可靠性和安全性。",
+            "readiness_score": 100,
+            "short_description": "Gemini Secretary 系統通過日誌記錄、自檢和緊急恢復協議來保護系統並提供防失憶能力。",
+            "dependencies": [
+                "sys",
+                "os",
+                "sqlite3",
+                "datetime",
+                "OpenHarness_Base"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:04:08"
+        },
+        {
+            "file_name": "hello_test_run.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\hello_test_run.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "在需要快速验证脚本执行状态时，比如系统启动或初始化过程中。",
+            "readiness_score": 100,
+            "short_description": "一个简单的Python脚本，用于输出成功消息。",
+            "dependencies": [],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:04:33"
+        },
+        {
+            "file_name": "Robot_Movement.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Robot_Movement.py",
+            "category": "核心智慧路由",
+            "ai_best_use_case": "在工業環境中進行機器人軌跡規劃和運動控制，確保高效且安全的作業流程。",
+            "readiness_score": 100,
+            "short_description": "用於6軸工業機器人臂的多軸運動控制和軌跡規劃。",
+            "dependencies": [
+                "time",
+                "sys",
+                "os"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:04:47"
+        },
+        {
+            "file_name": "Sensor_Sampling.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Sensor_Sampling.py",
+            "category": "Logic (Telemetry & Diagnostics)",
+            "ai_best_use_case": "Real-time monitoring of sensor data for telemetry and diagnostics, particularly useful in applications where temperature and voltage thresholds need to be closely monitored.",
+            "readiness_score": 100,
+            "short_description": "This script handles the collection, analysis, and logging of sensor data, ensuring real-time threshold checks and persistent storage in a SQLite database.",
+            "dependencies": [
+                "time",
+                "sys",
+                "os",
+                "random",
+                "sqlite3"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:05:02"
+        },
+        {
+            "file_name": "Temp_TDD_Brick.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Temp_TDD_Brick.py",
+            "category": "未知",
+            "ai_best_use_case": "無適用情境",
+            "readiness_score": 100,
+            "short_description": "目前缺少有效代碼，無法進行功能描述",
+            "dependencies": [],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:05:25"
+        },
+        {
+            "file_name": "Test_Deployment.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Test_Deployment.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在組織需要將雲端職能模型正式同步到本地數據庫時，例如在新環境部署或數據庫重構後。",
+            "readiness_score": 100,
+            "short_description": "此模組负责将云端职能模型同步到本地数据库（Shared_Knowledge.db）。",
+            "dependencies": [
+                "sys",
+                "os",
+                "Swarm_Orchestrator"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:05:52"
+        },
+        {
+            "file_name": "Test_Safe_Brick.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Test_Safe_Brick.py",
+            "category": "輔助工具",
+            "ai_best_use_case": "在開發或測試環境中，用於顯示和確認安全相關的 telemetry 數據",
+            "readiness_score": 100,
+            "short_description": "一個簡單的腳本，用於打印 'Hello, this is a safe telemetry brick.'",
+            "dependencies": [],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:06:03"
+        },
+        {
+            "file_name": "Test_Sync_Job.py",
+            "path": "RD_Center\\SDK_Bricks\\Logic\\Test_Sync_Job.py",
+            "category": "資料調度與同步",
+            "ai_best_use_case": "在系統進行重大數據更新或配置更改時，作為同步測試的最後一層保障。",
+            "readiness_score": 100,
+            "short_description": "用於測試系統是否能順利與 Common Memory Sync 進行物理通訊，并使 Node D 准備好進行後續的連結。",
+            "dependencies": [
+                "sys"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:06:29"
+        },
+        {
+            "file_name": "dashboard_server.py",
+            "path": "dashboard_server.py",
+            "category": "系統防護與健康監控",
+            "ai_best_use_case": "在系統出現異常或需要自動化監控時，利用AI來分析和處理數據，提高系統穩定性和可靠性。",
+            "readiness_score": 100,
+            "short_description": "此模組用於實時監控計算機硬件和應用程序的狀態，並使用AI進行故障預測和處理。",
+            "dependencies": [
+                "Gemini_Agent",
+                "http.server",
+                "socketserver",
+                "json",
+                "os",
+                "sys",
+                "urllib.parse",
+                "urllib.request",
+                "random",
+                "sqlite3",
+                "time",
+                "datetime",
+                "subprocess"
+            ],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:06:29"
+        },
+        {
+            "file_name": "genesis_closed_loop_optimizer.py",
+            "path": "genesis_closed_loop_optimizer.py",
+            "category": "專用工具與擴充模組",
+            "ai_best_use_case": "按需點火調度。",
+            "readiness_score": 90,
+            "short_description": "",
+            "dependencies": [],
+            "ruff_violations_count": 0,
+            "last_updated": "2026-07-24 00:06:29"
+        }
+    ],
+    "engine_details": {
+        "langgraph_active": true,
+        "prefect_monitored": true,
+        "lightrag_grounded": true,
+        "ruff_analyzer_active": true,
+        "diskcache_hits": 41,
+        "newly_compiled": 10
+    }
+}

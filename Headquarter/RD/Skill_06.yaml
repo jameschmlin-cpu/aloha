@@ -1,0 +1,3 @@
+-- 執行此 SQL 以初始化您的決策記憶庫
+INSERT INTO agent_execution_log (agent_name, action, status, node_c_code) 
+VALUES ('CEO_SYSTEM', 'BOOT', 'READY', '0xFC09');

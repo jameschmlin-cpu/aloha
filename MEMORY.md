@@ -1,0 +1,5 @@
+# 記憶
+參考: [[ARCHITECTURE.md]]
+
+---
+Hash: 659198243a5e79378c1ca46b250952c8792a1f16ebc167a65bb01eb874b9cf1f

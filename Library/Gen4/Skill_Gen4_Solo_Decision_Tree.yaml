@@ -1,0 +1,23 @@
+# C:\Genesis\Library\Gen4\Skill_Gen4_Solo_Decision_Tree.yaml
+Skill_Metadata:
+  Name: "Solo_Decision_Engine"
+  Version: "1.0.0"
+  Hash: "0xGEN4_SOLO_DECISION_READY_A7F9"
+
+Execution_Logic:
+  # 決策樹：自動化處理「委外 vs 執行」判斷
+  Flow:
+    Trigger: "Task_Input"
+    Step_1: "Check_Resource_Availability"
+    Step_2: "IF Internal_Expertise_Match == True THEN Execute_Native"
+    Step_3: "ELSE Dispatch_To_Outsourcing_Agent"
+  
+  # DFMEA：防禦機制 (Failure Prevention)
+  Error_Handling:
+    Node_Timeout: "Retry_Auto(2)"
+    Logical_Deadlock: "Self_Healing_Reset_Trigger"
+    Alert: "Log_To_Node_C_Critical"
+
+# 物理執行介面
+Implementation:
+  Script_Path: "C:\Genesis\Library\Gen4\Solo_Decision.py"

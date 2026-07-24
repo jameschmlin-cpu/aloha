@@ -1,0 +1,2 @@
+# C:\Genesis\SDK\test_job.py
+print("GENESIS_SUCCESS_PHYSICAL_LINK_CONFIRMED")

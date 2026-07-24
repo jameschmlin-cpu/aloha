@@ -1,0 +1,9 @@
+{
+    "registry": {
+        "sdk_base": "C:\\Genesis\\RD_Center\\SDK"
+    },
+    "settings": {
+        "auto_healing": true,
+        "dfmea_sync": true
+    }
+}

@@ -1,0 +1,27 @@
+# C:\Genesis\Headquarter\Specs\Skill_Hardware_Deployment_Strategy.yaml
+Skill_Metadata:
+  Name: "Genesis_Hardware_Strategy"
+  Version: "1.0.0"
+  Status: "Standardized"
+  Hash: "0xHARDWARE_STRATEGY_READY"
+
+Hardware_Categorization:
+  # 1. 授權與通用載體 (SanDisk USB)
+  General_Auth_Carrier:
+    Device: "SanDisk_USB_3.2"
+    Role: "授權握手與SDK安裝包載體"
+    Primary_Use: "Gen1生活總管, Gen2 IT維修, Gen3金融理財"
+    Logic: "啟動時與雲端進行 Challenge-Response 握手"
+
+  # 2. 數據保險庫載體 (KDATA 防寫隨身碟)
+  Data_Vault_Carrier:
+    Device: "KDATA_Physical_Switch"
+    Role: "機密數據防寫保險庫"
+    Primary_Use: "Gen4專家服務, Gen5長照管理"
+    Logic: "利用實體防寫開關 (Write_Protect) 達成硬體級數據隔離"
+
+Operational_Protocol:
+  Validation_Node: "Node_C" # 驗證邏輯：插入時觸發硬體 UID 比對
+  Security_State: 
+    Protected: "開關撥至防寫模式 -> 系統觸發唯讀狀態 (防勒索)"
+    Unprotected: "開關撥至寫入模式 -> 系統觸發資料同步與備份"

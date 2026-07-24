@@ -1,0 +1,29 @@
+# C:\Genesis\Headquarter\Specs\Genesis_Security_Circuit_Specs.yaml
+Skill_Metadata:
+  Name: "Security_Circuit_Locker"
+  Version: "1.0.0"
+  Purpose: "物理授權迴路與資安防禦"
+  Hash: "0xSECURITY_CIRCUIT_SPECS_LOCKED"
+
+Circuit_Design_Specs:
+  # 物理層：Dongle 僅作為授權迴路 (Locker)
+  Hardware_Role: 
+    Type: "Logic_Key"
+    Memory_Usage: "Minimal_UID_Storage" # 僅儲存加密憑證與 UID，不存放應用程式
+    Function: "物理閉合迴路 (Physical_Closed_Circuit)"
+
+  # 軟體層：本地執行 (Performance)
+  Software_Role:
+    Storage: "Customer_Local_HDD" # 程式本體執行於客戶硬碟
+    Security_State: "Encrypted_Dead_Code" # 未獲授權前全數為亂碼執行檔
+
+  # 資安防禦迴路邏輯
+  Auth_Logic:
+    Step_1: "Hardware_Handshake" # 偵測硬體鎖 UID
+    Step_2: "Signal_Verification" # 雲端/本地 Hash 簽署比對
+    Step_3: "Memory_Injection"    # 授權通過後，將解密 Signal 注入記憶體喚醒 Dead_Code
+    Step_4: "Circuit_Break_Monitoring" # 背景監測，一旦偵測硬體鎖移除，立即執行強制清除 (Wipe) 與鎖定
+
+Implementation_Notes:
+  - 規格重點：無須追求硬體大容量，追求的是 UID 驗證的「不可偽造性」與「通訊反應速度」。
+  - 資安防禦：此迴路設計可有效抵禦駭客截持，因為應用程式本身並非依賴 USB 運行，攻擊者無法直接從 USB 複製程式碼。

@@ -1,0 +1,4 @@
+# 檢查核心目錄是否存在
+dir C:\Genesis\.agents\skills\empire_agents\
+# 確保無遺留舊路徑
+if exist C:\Lobster_Brain_System del /s /q C:\Lobster_Brain_System

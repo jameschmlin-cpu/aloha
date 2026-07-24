@@ -1,0 +1,4 @@
+auto_mount: true
+path: C:\Genesis\awesome-llm-apps\rag_tutorials
+skill_name: rag_tutorials
+status: READY

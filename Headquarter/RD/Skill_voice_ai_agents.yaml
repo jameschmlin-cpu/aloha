@@ -1,0 +1,4 @@
+auto_mount: true
+path: C:\Genesis\awesome-llm-apps\voice_ai_agents
+skill_name: voice_ai_agents
+status: READY

@@ -1,0 +1,4 @@
+auto_mount: true
+path: C:\Genesis\awesome-llm-apps\generative_ui_agents
+skill_name: generative_ui_agents
+status: READY

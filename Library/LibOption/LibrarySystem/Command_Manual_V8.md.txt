@@ -1,0 +1,6 @@
+// [志玲 V2-Core 補強指令]
+// 每次對話完畢，志玲會自動呼叫此邏輯：
+async function updateEmpireMemory(intent) {
+    const summary = `[指令]：${intent} | [狀態]：六隻龍蝦併網完成 | [Hash]：${intel.hash.slice(0,8)}`;
+    // 自動寫入 Empire_Memory.db 與 checkpoint.json
+}

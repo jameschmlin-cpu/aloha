@@ -1,0 +1,9 @@
+skill_name: AuditMonitor
+class_name: AuditMonitor
+description: 未提供類別描述。
+methods:
+- name: watch
+  description: 未提供方法描述。
+  parameters: []
+auto_mount: true
+status: READY

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title id="dynamic-title">龍蝦帝國頂真控制台</title>
+    <style>
+        :root { --bg-light: #F9FAFB; --panel-bg: #F5F3FF; --purple-main: #6D28D9; --purple-btn: #8B5CF6; --accent-gold: #FBBF24; --text-dark: #1F2937; }
+        body { background-color: var(--bg-light); color: var(--text-dark); font-family: "Microsoft JhengHei", sans-serif; margin: 0; display: flex; flex-direction: column; height: 100vh; border: 4px solid var(--purple-main); box-sizing: border-box; }
+        #top-header { background: linear-gradient(90deg, var(--purple-main), #4C1D95); color: var(--accent-gold); padding: 12px; text-align: center; font-weight: bold; font-size: 1.15em; border-bottom: 3px solid var(--accent-gold); }
+        #main-layout { display: flex; flex: 1; padding: 15px; gap: 15px; overflow: hidden; }
+        #side-panel { width: 300px; display: flex; flex-direction: column; gap: 12px; background: var(--panel-bg); border: 2px solid var(--purple-main); border-radius: 12px; padding: 15px; overflow-y: auto; }
+        .cat-title { color: var(--purple-main); font-weight: bold; border-bottom: 2px solid var(--purple-btn); margin-bottom: 8px; font-size: 0.95em; }
+        .nav-btn { width: 100%; padding: 11px; margin-bottom: 6px; background: var(--purple-btn); color: white; border: none; border-radius: 6px; cursor: pointer; text-align: left; font-weight: bold; transition: 0.2s; }
+        .nav-btn:hover { background: var(--purple-main); transform: translateX(4px); }
+        #center-area { flex: 2; display: flex; flex-direction: column; gap: 15px; }
+        #projection-screen { flex: 1; background: #FFF; border: 3px solid var(--purple-main); border-radius: 12px; padding: 20px; overflow-y: auto; }
+        #console-log { height: 130px; background: #1F2937; color: #10B981; padding: 12px; border-radius: 8px; font-family: "Consolas", monospace; overflow-y: auto; font-size: 0.85em; white-space: pre-wrap; }
+        #telegram-panel { width: 360px; background: #FFF; border: 2px solid var(--purple-main); border-radius: 12px; display: flex; flex-direction: column; }
+        #chat-log { flex: 1; padding: 15px; overflow-y: auto; font-size: 0.9em; background: #FAFAFA; }
+        .input-area { padding: 12px; border-top: 2px solid var(--purple-main); display: flex; gap: 8px; }
+        input { flex: 1; border: 2px solid var(--purple-btn); padding: 8px; border-radius: 6px; }
+    </style>
+</head>
+<body>
+
+<div id="top-header">⚡ [大一統主權開機] 正在調度 SDK 異步自檢...</div>
+
+<div id="main-layout">
+    <div id="side-panel">
+        <div id="api-mega-title" class="cat-title">模組調度</div>
+        <div id="api-mega-container"></div>
+        <div id="rss-title" class="cat-title">帝國實時流</div>
+        <div id="rss-display">...</div>
+        <div id="location-badge">C:\ITE\Imperial_Launcher.py</div>
+    </div>
+
+    <div id="center-area">
+        <div id="projection-screen">
+            <h2 id="wait-mesh-title" style="color:var(--purple-main); text-align:center;">帝國中樞待命中</h2>
+        </div>
+        <div id="console-log">系統初始化中...</div>
+    </div>
+
+    <div id="telegram-panel">
+        <div id="chat-log"></div>
+        <div class="input-area">
+            <input type="text" id="ui" placeholder="輸入指令..." onkeypress="if(event.keyCode==13) s()">
+            <button onclick="s()">發送</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const LOG = document.getElementById('console-log');
+    function appendLog(msg) {
+        LOG.innerHTML += `\n[${new Date().toLocaleTimeString()}] ${msg}`;
+        LOG.scrollTop = LOG.scrollHeight;
+    }
+
+    async function bootSyncDynamicConfig() {
+        try {
+            // 嘗試與您本地端 Imperial_Launcher 產出的 API 握手
+            const r = await fetch('http://127.0.0.1:5000/api/get_brain_ui');
+            if (!r.ok) throw new Error("大腦血管未過電");
+            const cfg = await r.json();
+            
+            document.getElementById('dynamic-title').innerText = cfg.window_title;
+            appendLog("✅ 帝國 UI 骨架已與 C:\ITE\Imperial_Launcher.py 物理對接。");
+        } catch (e) {
+            appendLog("⚠️ 正在等待 Imperial_Launcher 點火...");
+            setTimeout(bootSyncDynamicConfig, 3000);
+        }
+    }
+
+    function s() {
+        const input = document.getElementById('ui');
+        if (!input.value) return;
+        document.getElementById('chat-log').innerHTML += `<div style="padding:5px;">指令: ${input.value}</div>`;
+        appendLog(`物理指令下達: ${input.value}`);
+        input.value = '';
+    }
+
+    window.onload = bootSyncDynamicConfig;
+</script>
+</body>
+</html>innerText = cfg.wait_mesh_text;
+            document.getElementById('chat-log').innerHTML = `<div class="msg-bubble msg-zhiling"><b>系統公告:</b> ${cfg.chat_init_text}</div>`;
+            document.getElementById('ui').placeholder = cfg.input_placeholder;
+            document.getElementById('send-btn').innerText = cfg.send_btn_text;
+            
+            appendLog("> [獨立思考解鎖] 前端 HMI 面板全量動態併網成功，啟動舉一反三自癒偵測器。");
+            buildUIPanels(cfg);
+        } catch (e) {
+            if (retryCount < MAX_RETRIES) {
+                retryCount++;
+                document.getElementById('top-header').innerText = `🩺 [大醫生自癒連線中] 總線排隊中... (重試 ${retryCount}/${MAX_RETRIES})`;
+                setTimeout(bootSyncDynamicConfig, 2000);
+            } else {
+                document.getElementById('top-header').innerText = "🏛️ 龍蝦部隊總部控制台 | [安全備援記憶啟用] | 統帥: 林雋懋";
+                loadFallbackConfig();
+            }
+        }
+    }
+
+    function buildUIPanels(cfg) {
+        const megaBox = document.getElementById('api-mega-container'); megaBox.innerHTML = '';
+        cfg.api_mega_buttons.forEach(btn => {
+            const b = document.createElement('button');
+            b.style = "background: #4C1D95; color: white; border: none; border-radius: 4px; padding: 8px 4px; font-size: 0.75em; cursor: pointer; font-weight: bold; transition:0.2s;";
+            b.innerText = btn.label; b.onclick = () => triggerApiMega(btn.value);
+            megaBox.appendChild(b);
+        });
+
+        const hostBox = document.getElementById('host-container'); hostBox.innerHTML = '';
+        cfg.hosts.forEach(h => {
+            const b = document.createElement('button'); b.className = "nav-btn";
+            b.innerHTML = `<span style="font-size:1.1em;">🖥️</span> ${h.name}`; b.onclick = () => p(h.id); hostBox.appendChild(b);
+        });
+
+        const squadBox = document.getElementById('squad-container'); squadBox.innerHTML = '';
+        cfg.squads.forEach(s => {
+            const b = document.createElement('button'); b.className = "nav-btn";
+            b.innerHTML = `<span style="font-size:1.1em;">👤</span> ${s.name}`; b.onclick = () => p(s.id); squadBox.appendChild(b);
+        });
+    }
+
+    async function triggerApiMega(actionKey) {
+        const t = document.getElementById('dt');
+        t.innerHTML = `<h3 style="color:var(--purple-main); text-align:center; margin-top:40px;">🛡️ SDK 微型偵測器：正在解算 [${actionKey}] 數據鏈路...</h3>`;
+        try {
+            const r = await fetch('http://127.0.0.1:5000/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ msg: actionKey, mode: "API_MEGA" })
+            });
+            const d = await r.json();
+            
+            const isError = d.status.includes("ERR");
+            const themeColor = isError ? "var(--error-red)" : "var(--purple-main)";
+            
+            t.innerHTML = `
+                <h2 style="color:${themeColor}; text-align:left; margin-bottom:15px;">👑 ${actionKey} 實時投影 Facts</h2>
+                <div style="background:var(--panel-bg); padding:18px; border:2px solid ${themeColor}; border-radius:10px; text-align:left; font-family: monospace; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <div style="color:${themeColor}; font-weight:bold; font-size:1.1em; margin-bottom: 8px;">📊 自檢碼: ${d.status}</div>
+                    <div style="color:#7C3AED; font-weight:bold; margin-bottom: 10px;">⚙️ 核心組件: ${d.app_triggered}</div>
+                    <div style="white-space: pre-wrap; background:#FFF; padding:12px; border:1px solid #DDD; border-radius:6px; line-height:1.5; color:#374151;">${d.detail}</div>
+                </div>`;
+            appendLog(`[API-MEGA] [${actionKey}] 品質校驗完畢。代碼: ${d.status}`);
+        } catch (e) { 
+            t.innerHTML = '<h2 style="color:var(--error-red);">⚠️ 物理端/邏輯端數據鏈路崩塌，總線阻斷</h2>'; 
+        }
+    }
+
+    async function p(id) {
+        const t = document.getElementById('dt');
+        t.innerHTML = `<h3 style="color:var(--purple-main); text-align:center; margin-top:40px;">👁️ 戰隊動態影目投影中 [${id}] ...</h3>`;
+        try {
+            const r = await fetch(`http://127.0.0.1:5000/data?node=${encodeURIComponent(id)}`);
+            const d = await r.json();
+            
+            const isError = d.status.includes("ERR");
+            const themeColor = isError ? "var(--error-red)" : "var(--purple-main)";
+            
+            t.innerHTML = `
+                <h2 style="color:${themeColor}; text-align:left; margin-bottom:15px;">👁️ [${d.id}] 活體位置線程投影</h2>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; background:var(--panel-bg); padding:18px; border:2px solid ${themeColor}; border-radius:10px; text-align:left; font-family:monospace;">
+                    <div style="grid-column: span 2; color:#059669; word-break:break-all; font-weight:bold;">🧬 實體校驗 Hash: ${d.hash}</div>
+                    <div><b>物理溫度:</b> ${d.temp}</div>
+                    <div><b>即時負載:</b> ${d.load}</div>
+                    <div><b>內存開銷:</b> ${d.vram}</div>
+                    <div><b>偵測代碼:</b> <span style="color:${themeColor}; font-weight:bold;">${d.status}</span></div>
+                    <div style="grid-column: span 2; background:#FFF; padding:12px; border:1px solid var(--purple-btn); border-radius:6px; font-size:0.95em; line-height:1.5; color:#1F2937;">
+                        ${d.dfmea}
+                    </div>
+                </div>`;
+            appendLog(`[HARDWARE] 節點 [${d.id}] 活體業務穿透成功。自檢碼: ${d.status}`);
+        } catch (e) { 
+            t.innerHTML = '<h2 style="color:var(--error-red);">⚠️ 實體通訊線路破裂</h2>'; 
+        }
+    }
+
+    async function s() {
+        const i = document.getElementById('ui'), h = document.getElementById('chat-log');
+        if(!i.value) return;
+        const cmd = i.value;
+        
+        h.innerHTML += `<div class="msg-bubble msg-user"><b>主管:</b> ${cmd}</div>`;
+        appendLog(`[TELEGRAM] 擊發統帥指令: [${cmd}]`);
+        h.scrollTop = h.scrollHeight;
+        i.value = "";
+        
+        try {
+            const r = await fetch('http://127.0.0.1:5000/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ msg: cmd, mode: "CHAT" })
+            });
+            const d = await r.json();
+            h.innerHTML += `<div class="msg-bubble msg-zhiling"><b>志玲:</b> ${d.text}</div>`;
+        } catch (e) { 
+            h.innerHTML += '<div class="msg-bubble msg-zhiling" style="color:var(--error-red);">⚠️ 網閘連線阻斷</div>'; 
+        }
+        h.scrollTop = h.scrollHeight;
+    }
+
+    bootSyncDynamicConfig();
+</script>
+</body>
+</html>

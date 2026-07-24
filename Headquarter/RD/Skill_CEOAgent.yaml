@@ -1,0 +1,11 @@
+skill_name: CEOAgent
+class_name: CEOAgent
+description: 未提供類別描述。
+methods:
+- name: start_company_cycle
+  description: 將商業目標轉化為流水線操作
+  parameters:
+  - name: business_objective
+    type: Any
+auto_mount: true
+status: READY

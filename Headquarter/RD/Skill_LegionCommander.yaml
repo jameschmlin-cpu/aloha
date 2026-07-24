@@ -1,0 +1,13 @@
+skill_name: LegionCommander
+class_name: LegionCommander
+description: 未提供類別描述。
+methods:
+- name: trigger_evolution
+  description: 核心進化指令：將邏輯自動寫入物理檔案，完成軍團自我擴張
+  parameters:
+  - name: task_name
+    type: Any
+  - name: logic_content
+    type: Any
+auto_mount: true
+status: READY

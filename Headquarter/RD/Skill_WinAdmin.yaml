@@ -1,0 +1,5 @@
+auto_load: true
+communication_bus: Shared_Memory_Bus
+role: System_Administrator
+status: AUTONOMOUS
+path: C:\Genesis\Headquarter\RD\Skill_WinAdmin.py

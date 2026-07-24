@@ -1,0 +1,16 @@
+C:\Genesis\
+├── .agents/
+│   └── skills/
+│       └── empire_agents/
+│           ├── Empire_Orchestrator.yaml       # Antigravity 2.0 萬用 YAML 技能設定檔
+│           ├── Universal_Genesis_Agent.py     # 您提供的全能型 Agent 主程式 (核心引擎)
+│           └── subagents/
+│               ├── PM_Agent.py                # 專案管理與需求拆解 Agent
+│               ├── RD_Agent.py                # 程式撰寫與系統研發 Agent
+│               ├── QA_Agent.py                # 品質保證與 DFMEA 記憶體校驗 Agent (Node C)
+│               ├── Sales_Agent.py             # 市場開發與客戶數據分析 Agent
+│               ├── MFG_Agent.py               # 製造部署與 CI/CD 實體建構 Agent
+│               └── SCM_Agent.py               # 供應鏈與依賴套件版本控管 Agent
+├── Database/
+│   └── Genesis_History.db                     # 核心數據閉環與狀態儲存資料庫
+└── system_monitor.log                         # 全域系統監控日誌

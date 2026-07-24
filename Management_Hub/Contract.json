@@ -1,0 +1,13 @@
+{
+  "contract_id": "GENESIS_CLEANUP_001",
+  "priority_levels": {
+    "P1": "SDK_Root",
+    "P2": "General_Modules",
+    "P3": "Brick_Projects"
+  },
+  "safety_protocol": {
+    "halt_on_fail": true,
+    "require_supervisor_approval": true
+  },
+  "status": "INITIALIZED"
+}

@@ -1,0 +1,102 @@
+{
+    ".": [
+        "Command_Manual_V8.md.txt",
+        "Constitution_V7.md.txt",
+        "Runner_Manifest.json",
+        "Soul.md"
+    ],
+    "Audio": [
+        "Chiling_Final_Soul.mp3"
+    ],
+    "Brain_Logs": [
+        "Empire_Blueprint_V1.txt",
+        "Empire_Blueprint_V2.txt",
+        "Master_Inventory.json",
+        "Security_Scan.json"
+    ],
+    "Credentials": [],
+    "Inventory": [
+        "System_Resource.log"
+    ],
+    "Maintenance": [
+        "Speak_V41_Final.ps1"
+    ],
+    "Media": [],
+    "Products": [
+        "Safety_Product.exe"
+    ],
+    "Products\\Safety_Product.build": [
+        ".gitignore",
+        ".sconsign-314.dblite",
+        "@link_input.txt",
+        "build_definitions.h",
+        "import.lib",
+        "module.__main__.c",
+        "module.__main__.const",
+        "module.__main__.o",
+        "scons-debug.bat",
+        "scons-debug.py",
+        "scons-report.txt",
+        "__bytecode.const",
+        "__constants.bin",
+        "__constants.c",
+        "__constants.const",
+        "__constants.h",
+        "__constants.o",
+        "__constants.txt",
+        "__constants_data.c",
+        "__constants_data.o",
+        "__helpers.c",
+        "__helpers.h",
+        "__helpers.o",
+        "__loader.c",
+        "__loader.o"
+    ],
+    "Products\\Safety_Product.build\\static_src": [
+        "CompiledFunctionType.c",
+        "CompiledFunctionType.o",
+        "MainProgram.c",
+        "MainProgram.o"
+    ],
+    "Products\\Safety_Product.dist": [
+        "libcrypto-3.dll",
+        "libssl-3.dll",
+        "python314.dll",
+        "Safety_Product.dll",
+        "select.pyd",
+        "unicodedata.pyd",
+        "vcruntime140.dll",
+        "vcruntime140_1.dll",
+        "_bz2.pyd",
+        "_decimal.pyd",
+        "_hashlib.pyd",
+        "_lzma.pyd",
+        "_socket.pyd",
+        "_ssl.pyd",
+        "_wmi.pyd",
+        "_zstd.pyd"
+    ],
+    "Products\\Safety_Product.onefile-build": [
+        ".gitignore",
+        ".sconsign-314.dblite",
+        "onefile_definitions.h",
+        "scons-debug.bat",
+        "scons-debug.py",
+        "scons-report.txt",
+        "__payload.bin"
+    ],
+    "Products\\Safety_Product.onefile-build\\static_src": [
+        "OnefileBootstrap.c",
+        "OnefileBootstrap.o"
+    ],
+    "Skills": [
+        "Identity_Check.py",
+        "Safety_Product.py",
+        "System_Health.py"
+    ],
+    "Skills\\Security": [
+        "Imperial_Master_SDK_V2.py"
+    ],
+    "Skills\\SOP": [],
+    "Snapshots": []
+}

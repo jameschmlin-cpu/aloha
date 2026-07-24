@@ -1,0 +1,17 @@
+{
+    "Watcher.py": {
+        "priority": "CRITICAL",
+        "path": "C:\\Genesis\\Engine\\Watcher.py",
+        "status": "active"
+    },
+    "Memory_Sync_Guard.py": {
+        "priority": "CRITICAL",
+        "path": "C:\\Genesis\\Management_Hub\\Memory_Sync_Guard.py",
+        "status": "active"
+    },
+    "Gemini_Command_Center.py": {
+        "priority": "CRITICAL",
+        "path": "C:\\Genesis\\Management_Hub\\Gemini_Command_Cente_3.py",
+        "status": "active"
+    }
+}

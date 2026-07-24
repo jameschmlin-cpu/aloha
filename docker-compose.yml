@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------
+  # n8n Automation Workflow Platform
+  # ----------------------------------------------------
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n_local
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_PORT=5678
+      - N8N_SECURE_COOKIE=false
+      - GENESIS_API_URL=http://host.docker.internal:8000
+    volumes:
+      - n8n_data:/home/node/.n8n
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # ----------------------------------------------------
+  # Dify AI Agent Orchestration Stack
+  # ----------------------------------------------------
+  dify-db:
+    image: postgres:15-alpine
+    container_name: dify_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dify_password
+      POSTGRES_DB: dify
+    volumes:
+      - dify_db_data:/var/lib/postgresql/data
+
+  dify-redis:
+    image: redis:6-alpine
+    container_name: dify_redis
+    restart: always
+    volumes:
+      - dify_redis_data:/data
+
+  dify-sandbox:
+    image: langgenius/dify-sandbox:0.2.10
+    container_name: dify_sandbox
+    restart: always
+    environment:
+      API_KEY: dify_sandbox_api_key
+    ports:
+      - "8194:8194"
+
+  dify-api:
+    image: langgenius/dify-api:0.6.11
+    container_name: dify_api
+    restart: always
+    environment:
+      MODE: api
+      DB_USERNAME: postgres
+      DB_PASSWORD: dify_password
+      DB_HOST: dify-db
+      DB_PORT: 5432
+      DB_DATABASE: dify
+      REDIS_HOST: dify-redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+      REDIS_PASSWORD: ""
+      CELERY_BROKER_URL: redis://dify-redis:6379/1
+      CELERY_RESULT_BACKEND: redis://dify-redis:6379/1
+      KEY: dify_secure_key_12345
+      SANDBOX_HOST: dify-sandbox
+      SANDBOX_PORT: 8194
+      SANDBOX_API_KEY: dify_sandbox_api_key
+    depends_on:
+      - dify-db
+      - dify-redis
+      - dify-sandbox
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  dify-worker:
+    image: langgenius/dify-worker:0.6.11
+    container_name: dify_worker
+    restart: always
+    environment:
+      MODE: worker
+      DB_USERNAME: postgres
+      DB_PASSWORD: dify_password
+      DB_HOST: dify-db
+      DB_PORT: 5432
+      DB_DATABASE: dify
+      REDIS_HOST: dify-redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+      REDIS_PASSWORD: ""
+      CELERY_BROKER_URL: redis://dify-redis:6379/1
+      CELERY_RESULT_BACKEND: redis://dify-redis:6379/1
+      KEY: dify_secure_key_12345
+      SANDBOX_HOST: dify-sandbox
+      SANDBOX_PORT: 8194
+      SANDBOX_API_KEY: dify_sandbox_api_key
+    depends_on:
+      - dify-db
+      - dify-redis
+      - dify-sandbox
+
+  dify-web:
+    image: langgenius/dify-web:0.6.11
+    container_name: dify_web
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      CONSOLE_API_URL: http://host.docker.internal:5001
+      APP_API_URL: http://host.docker.internal:5001
+    depends_on:
+      - dify-api
+
+volumes:
+  n8n_data:
+  dify_db_data:
+  dify_redis_data:
