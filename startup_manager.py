@@ -84,13 +84,17 @@ def run_golden_startup_pipeline():
                 # 測試型點火驗證 2 秒後安全釋放交給 Watchdog
                 proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding="utf-8", errors="replace")
                 time.sleep(2)
-                if proc.poll() is None:
+                ret = proc.poll()
+                if ret is None:
                     proc.kill()
                     log_and_print(f"  >>> 【✔ PASS 驗證通過】項目 [{name}] 正常，已納入 Watchdog2 按需點火清單。")
                     passed_count += 1
+                elif ret == 0:
+                    log_and_print(f"  >>> 【✔ PASS 驗證通過（單次驗證點火完成）】項目 [{name}] 正常退出。")
+                    passed_count += 1
                 else:
                     _, err = proc.communicate()
-                    log_and_print(f"  >>> 【❌ 警告】項目 [{name}] 啟動異常: {err.strip()}")
+                    log_and_print(f"  >>> 【❌ 警告】項目 [{name}] 啟動異常 (Exit Code: {ret}): {err.strip()}")
                     failed_count += 1
         except Exception as e:
             log_and_print(f"  >>> 【❌ 錯誤】項目 [{name}] 執行失敗: {str(e)}")
