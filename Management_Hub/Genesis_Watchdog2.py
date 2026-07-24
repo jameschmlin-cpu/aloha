@@ -336,7 +336,7 @@ if __name__ == "__main__":
                 monitor_script = os.path.join(GENESIS_BASE, "Management_Hub", "dashboard_ai_monitor.py")
                 if os.path.exists(monitor_script):
                     try:
-                        subprocess.run([sys.executable, monitor_script], creationflags=CREATE_NO_WINDOW, timeout=30.0)
+                        subprocess.run([sys.executable, monitor_script], creationflags=CREATE_NO_WINDOW, timeout=90.0)
                     except Exception as e:
                         logging.error(f"AI DFMEA Monitor run failed: {e}. Running legacy checks as fallback.")
                         check_and_revive_legacy()

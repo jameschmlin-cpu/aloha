@@ -2017,10 +2017,32 @@ class DashboardHandler(http.server.SimpleHTTPRequestHandler):
                             gpu_stats = get_real_gpu_stats()
                             cpu_load = get_windows_cpu_load()
                             ram_percent = get_windows_ram_load()
+                            
+                            # 實時端口監測，確保志玲能夠準確判定裝置/服務狀態
+                            import socket
+                            def quick_check(port):
+                                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                                s.settimeout(0.5)
+                                try:
+                                    s.connect(("127.0.0.1", port))
+                                    s.close()
+                                    return "ONLINE"
+                                except Exception:
+                                    return "OFFLINE"
+                            
+                            services_ports = {
+                                "Dashboard": 8000,
+                                "Node-RED": 1880,
+                                "ClawLibrary": 5188,
+                                "Ollama": 11434
+                            }
+                            services_status = {name: quick_check(port) for name, port in services_ports.items()}
+                            
                             telemetry_context = {
                                 "cpu": cpu_load,
                                 "ram": ram_percent,
-                                "gpu": gpu_stats
+                                "gpu": gpu_stats,
+                                "services_status": services_status
                             }
                         except Exception:
                             pass
